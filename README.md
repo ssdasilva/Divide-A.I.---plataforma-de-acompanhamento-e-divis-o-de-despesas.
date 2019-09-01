@@ -1,4 +1,4 @@
-# Divide-A.I.---plataforma-de-acompanhamento-e-divis-o-de-despesas.
+# Divide-A.I.---plataforma-de-acompanhamento-e-divisao-de-despesas.
 Este repositório contém códigos desenvolvidos pelo nosso grupo na disciplina de Engenharia de Software da UFMG.
 
 # Equipe:
