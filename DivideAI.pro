@@ -1,4 +1,5 @@
-QT += quick
+QT += quick sql
+
 CONFIG += c++11
 
 # The following define makes your compiler emit warnings if you use
@@ -12,8 +13,24 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
+HEADERS += \
+    src/database_manager.h \
+    src/divida.h \
+    src/divida_dao.h \
+    src/grupo.h \
+    src/grupo_dao.h \
+    src/usuario.h \
+    src/usuario_dao.h
+
 SOURCES += \
-        main.cpp
+        src/divida.cpp \
+        src/divida_dao.cpp \
+        src/grupo_dao.cpp \
+        src/main.cpp \
+        src/database_manager.cpp \
+        src/grupo.cpp \
+        src/usuario.cpp \
+        src/usuario_dao.cpp
 
 RESOURCES += qml.qrc
 
