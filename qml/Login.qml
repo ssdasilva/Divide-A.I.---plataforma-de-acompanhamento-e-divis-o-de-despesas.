@@ -53,6 +53,7 @@ Rectangle {
             placeholderText: qsTr("Digite sua senha")
             anchors.right: parent.right
             anchors.verticalCenter: password.verticalCenter
+            echoMode: TextInput.Password
         }
 
         Rectangle {
@@ -71,7 +72,10 @@ Rectangle {
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.topMargin: 10
             text: "Quero me cadastrar"
-            //onClicked:
+            onClicked:
+            {
+                stack.push(signIn_View)
+            }
         }
     }
 }

@@ -3,5 +3,6 @@
         <file>qml/main.qml</file>
         <file>qml/Login.qml</file>
         <file>qml/images/Logo.JPG</file>
+        <file>qml/SignIn.qml</file>
     </qresource>
 </RCC>
