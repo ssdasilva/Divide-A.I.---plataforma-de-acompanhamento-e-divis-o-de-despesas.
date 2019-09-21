@@ -1,7 +1,9 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.12
+import QtQuick.Window 2.12
 
-Rectangle{
+Rectangle {
+    id: loginWindow
     width: parent.width
     height: parent.height
 
@@ -10,12 +12,11 @@ Rectangle{
             source: "images/Logo.JPG"
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: parent.top
-            anchors.topMargin: 20
     }
 
     Rectangle {
         id: loginFields
-        width: parent.width>300 ? 300 : parent.width
+        width: 300
         height: parent.height - logo.height
         anchors.top: logo.bottom
         anchors.horizontalCenter: parent.horizontalCenter
@@ -26,7 +27,6 @@ Rectangle{
             text: qsTr("Nome de Usuário")
             anchors.top: parent.top
             anchors.left: parent.left
-            anchors.topMargin: 20
         }
         Text {
             id: password
@@ -37,9 +37,10 @@ Rectangle{
         }
         Button{
             id: okButton
+            width: 150
             anchors.top: password.bottom
             anchors.horizontalCenter: parent.horizontalCenter
-            anchors.topMargin: 40
+            anchors.topMargin: 30
             text: "Entrar"
             //onClicked: //tenho que terminar de implementar isso
         }
@@ -52,6 +53,25 @@ Rectangle{
             placeholderText: qsTr("Digite sua senha")
             anchors.right: parent.right
             anchors.verticalCenter: password.verticalCenter
+        }
+
+        Rectangle {
+            id: divisor
+            width: parent.width
+            height: 2
+            anchors.top: okButton.bottom
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.topMargin: 10
+            color: "#cccccc"
+        }
+        Button{
+            id: signInButton
+            width: 150
+            anchors.top: divisor.bottom
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.topMargin: 10
+            text: "Quero me cadastrar"
+            //onClicked:
         }
     }
 }
