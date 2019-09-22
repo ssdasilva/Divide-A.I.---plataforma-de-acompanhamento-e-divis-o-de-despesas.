@@ -14,6 +14,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 HEADERS += \
+    src/cadastrar_usuario.h \
     src/database_manager.h \
     src/divida.h \
     src/divida_dao.h \
@@ -23,6 +24,7 @@ HEADERS += \
     src/usuario_dao.h
 
 SOURCES += \
+        src/cadastrar_usuario.cpp \
         src/divida.cpp \
         src/divida_dao.cpp \
         src/grupo_dao.cpp \

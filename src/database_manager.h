@@ -12,7 +12,7 @@
 
 class QSqlDatabase;
 
-const QString DATABASE_FILENAME = QStringLiteral("uca.db");
+const QString DATABASE_FILENAME = QStringLiteral("DivideAI.db");
 
 class DatabaseManager {
 public:

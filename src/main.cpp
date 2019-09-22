@@ -1,5 +1,8 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QQmlContext>
+
+#include "cadastrar_usuario.h"
 
 int main(int argc, char *argv[]) {
   QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
@@ -14,6 +17,11 @@ int main(int argc, char *argv[]) {
                        QCoreApplication::exit(-1);
                    }, Qt::QueuedConnection);
   engine.load(url);
+
+  // Expõe o c++ para o qml
+  CadastrarUsuario *cadastrarUsuario = new CadastrarUsuario();
+  engine.rootContext()->setContextProperty("cadastrarUsuario",
+                                           cadastrarUsuario);
 
   return app.exec();
 }

@@ -2,3 +2,23 @@
 *.user
 
 build/
+
+DivideAI.pro.user.ec9268b
+
+build-DivideAI-Desktop_Qt_5_12_4_MinGW_64_bit-Debug/.qmake.stash
+
+*.stash
+
+build-DivideAI-Desktop_Qt_5_12_4_MinGW_64_bit-Debug/debug/
+
+DivideAI.pro.user.77c6806.4.10-pre1
+
+build-DivideAI-Desktop_Qt_5_12_4_MinGW_64_bit-Debug/
+
+*.exe
+
+*.o
+
+*.10-pre1
+
+*.autosave
