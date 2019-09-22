@@ -2,9 +2,13 @@
 
 Usuario::Usuario(QObject *parent) : QObject(parent) {}
 
-qint64 Usuario::CPF() const { return m_CPF; }
+QString Usuario::email() const { return m_email; }
 
-void Usuario::setCPF(const qint64 &CPF) { m_CPF = CPF; }
+void Usuario::setEmail(const QString &email) { m_email = email; }
+
+QString Usuario::senha() const { return m_senha; }
+
+void Usuario::setSenha(const QString &senha) { m_senha = senha; }
 
 qint8 Usuario::idade() const { return m_idade; }
 

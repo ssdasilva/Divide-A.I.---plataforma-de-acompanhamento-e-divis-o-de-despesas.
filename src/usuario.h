@@ -9,8 +9,11 @@ class Usuario : public QObject {
 public:
   explicit Usuario(QObject *parent = nullptr);
 
-  qint64 CPF() const;
-  void setCPF(const qint64 &CPF);
+  QString email() const;
+  void setEmail(const QString &email);
+
+  QString senha() const;
+  void setSenha(const QString &senha);
 
   qint8 idade() const;
   void setIdade(const qint8 &idade);
@@ -25,7 +28,9 @@ public:
   void setSaldo(float saldo);
 
 private:
-  qint64 m_CPF;
+  QString m_email;
+
+  QString m_senha;
 
   qint8 m_idade;
 

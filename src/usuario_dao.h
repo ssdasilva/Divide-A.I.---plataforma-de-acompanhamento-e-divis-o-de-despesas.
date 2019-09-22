@@ -16,14 +16,14 @@ public:
 
   bool insertUsuario(const Usuario &usuario) const;
 
-  bool removeUsuario(const qint64 &CPF) const;
+  bool removeUsuario(const QString &email) const;
 
   bool removeAll() const;
 
   int usuarioCount() const;
 
   std::unique_ptr<std::vector<std::unique_ptr<Usuario>>>
-  usuarios(const quint64 &CPF = 0) const;
+  usuarios(const QString &email = QString()) const;
 };
 
 #endif // USUARIO_DAO_H
