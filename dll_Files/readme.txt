@@ -1,0 +1,1 @@
+Copiar e colar estes arquivos no arquivo build-DivideAI gerado quando você roda o programa.

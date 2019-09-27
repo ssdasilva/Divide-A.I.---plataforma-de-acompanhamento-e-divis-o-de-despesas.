@@ -1,13 +1,11 @@
-CREATE SCHEMA Divide_AI;
-USE Divide_AI;
-
 CREATE TABLE Usuario (
-    CPF BIGINT NOT NULL,
-    Idade TINYINT,
-    Pnome VARCHAR(30),
+    Email VARCHAR(100) NOT NULL,
+	Senha VARCHAR(50) NOT NULL,
+    Nome VARCHAR(30),
     Sobrenome VARCHAR(50),
+	Idade INT,
     Saldo FLOAT,
-    PRIMARY KEY (CPF)
+    PRIMARY KEY (Email)
     );
 
 CREATE TABLE Grupo(
@@ -18,26 +16,26 @@ CREATE TABLE Grupo(
 );
 
 CREATE TABLE Divida(
-	CPF_devedor BIGINT NOT NULL,
-    CPF_credor BIGINT NOT NULL,
+	Email_devedor VARCHAR(100) NOT NULL,
+    Email_credor VARCHAR(100) NOT NULL,
     Quantia INT NOT NULL,
     Tipo_moeda VARCHAR(30),
     Categoria VARCHAR(30),
-    PRIMARY KEY (CPF_devedor , CPF_credor),
-    FOREIGN KEY (CPF_devedor)
-		REFERENCES Usuario (CPF)
+    PRIMARY KEY (Email_devedor , Email_credor),
+    FOREIGN KEY (Email_devedor)
+		REFERENCES Usuario (Email)
             ON DELETE CASCADE,
-	FOREIGN KEY (CPF_credor)
-		REFERENCES Usuario (CPF)
+	FOREIGN KEY (Email_credor)
+		REFERENCES Usuario (Email)
             ON DELETE CASCADE
 );
 
 CREATE TABLE Usuario_grupo(
-	CPF BIGINT NOT NULL,
+	Email VARCHAR(100) NOT NULL,
 	Identificador VARCHAR(50) NOT NULL,
-    PRIMARY KEY (CPF,Identificador),
-    FOREIGN KEY (CPF)
-		REFERENCES Usuario(CPF)
+    PRIMARY KEY (Email,Identificador),
+    FOREIGN KEY (Email)
+		REFERENCES Usuario(Email)
 			ON DELETE CASCADE,
 	FOREIGN KEY (Identificador)
 		REFERENCES Grupo(Identificador)
