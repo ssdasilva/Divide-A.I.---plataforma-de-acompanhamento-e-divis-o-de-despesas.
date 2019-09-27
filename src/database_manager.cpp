@@ -31,20 +31,6 @@ DatabaseManager::DatabaseManager()
   if (m_database->open()) {
     qDebug() << " Banco abriu";
     m_usuarioDAO.init();
-    /* Exemplo de uma consulta no banco */
-    qDebug() << "--------Exemplo de consulta no banco de dados:-------";
-    QSqlQuery query;
-    if(query.exec("SELECT * FROM public.usuario"))
-    {
-      qDebug()<<"Email/Senha/Nome/Sobrenome/Idade/Saldo";
-      while(query.next())
-      {
-       qDebug()<< query.value(0).toString()<<" "<< query.value(1).toString()<<" "<< query.value(2).toString()<<" "<< query.value(3).toString()<<" "<< query.value(4).toString()<<query.value(5).toString();
-      }
-      qDebug() << "-------------";
-     }
-     else
-       qDebug()<<"Erro ao tentar executar query";
   }
   else
     qDebug() << "Banco não foi aberto";
