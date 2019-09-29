@@ -112,6 +112,7 @@ Rectangle {
                 console.log("E-mail inexistente")
             } else {
                 console.log("E-mail encontrado!")
+                stack.push(mainDashboard_View)
                 //var isPasswordCorrect = cadastrarUsuario.
                 //if (isPasswordCorrect) {
                     //stack.push(mainApp_View)

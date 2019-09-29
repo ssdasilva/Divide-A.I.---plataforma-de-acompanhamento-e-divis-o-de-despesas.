@@ -3,7 +3,6 @@ import QtQuick.Window 2.11
 import QtQuick.Controls 2.12
 //import QtQuick.Layouts 1.3
 
-
 Window {
     id: root
     visible: true
@@ -24,5 +23,13 @@ Window {
     Component{
         id: signIn_View
         SignIn{}
+    }
+    Component {
+        id: mainDashboard_View
+        MainDashboard{}
+    }
+    Component {
+        id: newExpense_View
+        NewExpense{}
     }
 }
