@@ -9,11 +9,12 @@ bool DividaDAO::init() const {
 
   // Monta a query para criar a tabela caso ela ainda não exista
   return query.exec(QStringLiteral(
-      "CREATE TABLE IF NOT EXISTS divida (cpfDevedor BIGINT NOT "
-      "NULL, cpfCredor BIGINT NOT NULL, quantia INT NOT NULL, "
-      "tipoMoeda VARCHAR(30), categoria VARCHAR(30), PRIMARY KEY(cpfDevedor, "
-      "cpfCredor), FOREIGN KEY(cpfDevedor) REFERENCES usuario(CPF) ON DELETE "
-      "CASCADE, FOREIGN KEY(cpfCredor) REFERENCES usuario(CPF) ON DELETE "
+      "CREATE TABLE IF NOT EXISTS divida (emailDevedor VARCHAR(100) NOT "
+      "NULL, emailCredor VARCHAR(100) NOT NULL, quantia INT NOT NULL, "
+      "tipoMoeda VARCHAR(30), categoria VARCHAR(30), PRIMARY KEY(emailDevedor, "
+      "emailCredor), FOREIGN KEY(emailDevedor) REFERENCES usuario(email) ON "
+      "DELETE "
+      "CASCADE, FOREIGN KEY(emailCredor) REFERENCES usuario(email) ON DELETE "
       "CASCADE"));
 }
 
@@ -23,11 +24,11 @@ bool DividaDAO::insertDivida(const Divida &divida) const {
   // Monta a query com o uso de REPLACE de tal forma que a divida será
   // inserida se não existir, caso contrário, será atualizada
   query.prepare(
-      QStringLiteral("REPLACE INTO divida (cpfDevedor, cpfCredor, quantia, "
+      QStringLiteral("INSERT INTO divida (emailDevedor, emailCredor, quantia, "
                      "tipoMoeda, categoria) VALUES (?, ?, ?, ?, ?)"));
 
-  query.addBindValue(divida.cpfDevedor());
-  query.addBindValue(divida.cpfCredor());
+  query.addBindValue(divida.emailDevedor());
+  query.addBindValue(divida.emailCredor());
   query.addBindValue(divida.quantia());
   query.addBindValue(divida.tipoMoeda());
   query.addBindValue(divida.categoria());
@@ -35,14 +36,14 @@ bool DividaDAO::insertDivida(const Divida &divida) const {
   return query.exec();
 }
 
-bool DividaDAO::removeDivida(const qint64 &cpfDevedor,
-                             const qint64 &cpfCredor) const {
+bool DividaDAO::removeDivida(const QString &emailDevedor,
+                             const QString &emailCredor) const {
   QSqlQuery query;
 
   query.prepare(QStringLiteral(
-      "DELETE FROM divida WHERE cpfDevedor = ? AND cpfCredor = ?"));
-  query.addBindValue(cpfDevedor);
-  query.addBindValue(cpfCredor);
+      "DELETE FROM divida WHERE emailDevedor = ? AND emailCredor = ?"));
+  query.addBindValue(emailDevedor);
+  query.addBindValue(emailCredor);
 
   return query.exec();
 }
@@ -70,19 +71,27 @@ int DividaDAO::dividaCount() const {
 }
 
 std::unique_ptr<std::vector<std::unique_ptr<Divida>>>
-DividaDAO::usuarios(const qint64 &cpfDevedor, const qint64 &cpfCredor) const {
+DividaDAO::usuarios(const QString &emailDevedor,
+                    const QString &emailCredor) const {
   QSqlQuery query;
 
   // Verifica se os codigos de divida foi especificado para decidir se deve
   // executar a query selecionando todas as dividas da tabela ou somente a
   // divida de código especificado
-  if (cpfDevedor == -1 || cpfCredor == -1) {
+  if (emailDevedor.isEmpty() && emailCredor.isEmpty()) {
     query.prepare(QStringLiteral("SELECT * FROM divida"));
+  } else if (emailCredor.isEmpty()) {
+    query.prepare(
+        QStringLiteral("SELECT * FROM divida WHERE emailDevedor = ?"));
+    query.addBindValue(emailDevedor);
+  } else if (emailDevedor.isEmpty()) {
+    query.prepare(QStringLiteral("SELECT * FROM divida WHERE emailCredor = ?"));
+    query.addBindValue(emailCredor);
   } else {
     query.prepare(QStringLiteral(
-        "SELECT * FROM divida WHERE cpfDevedor = ? AND cpfCredor = ?"));
-    query.addBindValue(cpfDevedor);
-    query.addBindValue(cpfCredor);
+        "SELECT * FROM divida WHERE emailDevedor = ? AND emailCredor = ?"));
+    query.addBindValue(emailDevedor);
+    query.addBindValue(emailCredor);
   }
 
   query.exec();
@@ -95,8 +104,8 @@ DividaDAO::usuarios(const qint64 &cpfDevedor, const qint64 &cpfCredor) const {
   while (query.next()) {
     std::unique_ptr<Divida> divida(new Divida());
 
-    divida->setCpfDevedor(query.value(0).toInt());
-    divida->setCpfCredor(query.value(1).toInt());
+    divida->setEmailDevedor(query.value(0).toString());
+    divida->setEmailCredor(query.value(1).toString());
     divida->setQuantia(query.value(2).toInt());
     divida->setTipoMoeda(query.value(3).toString());
     divida->setCategoria(query.value(4).toString());
@@ -108,4 +117,17 @@ DividaDAO::usuarios(const qint64 &cpfDevedor, const qint64 &cpfCredor) const {
   }
 
   return list;
+}
+
+bool DividaDAO::atualizarQuantia(QString emailDevedor, QString emailCredor,
+                                 int quantia) {
+  QSqlQuery query;
+
+  query.prepare(QStringLiteral("UPDATE divida SET quantia = ? WHERE "
+                               "emailDevedor = ? AND emailCredor = ?"));
+  query.addBindValue(quantia);
+  query.addBindValue(emailDevedor);
+  query.addBindValue(emailCredor);
+
+  return query.exec();
 }

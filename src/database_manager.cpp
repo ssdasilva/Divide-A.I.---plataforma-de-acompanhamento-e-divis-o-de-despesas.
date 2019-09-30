@@ -29,10 +29,14 @@ DatabaseManager::DatabaseManager()
   m_database->setPort(5432);
   m_database->setDatabaseName("lhdsevbs");
   if (m_database->open()) {
-    qDebug() << " Banco abriu";
     m_usuarioDAO.init();
-  }
-  else
+
+    m_grupoDAO.init();
+
+    m_dividaDAO.init();
+
+    m_usuarioGrupoDAO.init();
+  } else
     qDebug() << "Banco não foi aberto";
 }
 
@@ -41,3 +45,7 @@ UsuarioDAO *DatabaseManager::usuarioDAO() { return &m_usuarioDAO; }
 GrupoDAO *DatabaseManager::grupoDAO() { return &m_grupoDAO; }
 
 DividaDAO *DatabaseManager::dividaDAO() { return &m_dividaDAO; }
+
+UsuarioGrupoDAO *DatabaseManager::usuarioGrupoDAO() {
+  return &m_usuarioGrupoDAO;
+}

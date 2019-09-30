@@ -4,6 +4,7 @@
 #include "usuario_dao.h"
 #include "grupo_dao.h"
 #include "divida_dao.h"
+#include "usuario_grupo_dao.h"
 
 #include <QString>
 
@@ -28,6 +29,8 @@ public:
 
   DividaDAO *dividaDAO();
 
+  UsuarioGrupoDAO *usuarioGrupoDAO();
+
 private:
   Q_DISABLE_COPY(DatabaseManager)
 
@@ -44,6 +47,8 @@ private:
   GrupoDAO m_grupoDAO;
 
   DividaDAO m_dividaDAO;
+
+  UsuarioGrupoDAO m_usuarioGrupoDAO;
 };
 
 #endif // DATABASE_MANAGER_H

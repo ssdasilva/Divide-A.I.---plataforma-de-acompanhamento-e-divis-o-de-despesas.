@@ -20,7 +20,7 @@ bool UsuarioDAO::insertUsuario(const Usuario &usuario) const {
   // Monta a query com o uso de REPLACE de tal forma que o usuário será
   // inserido se não existir, caso contrário, será atualizado
   query.prepare(QStringLiteral(
-      "REPLACE INTO usuario (email, senha, idade, nome, sobrenome, saldo) "
+      "INSERT INTO usuario (email, senha, idade, nome, sobrenome, saldo) "
       "VALUES (?, ?, ?, ?, ?, ?)"));
 
   query.addBindValue(usuario.email());
@@ -102,4 +102,59 @@ UsuarioDAO::usuarios(const QString &email) const {
   }
 
   return list;
+}
+
+bool UsuarioDAO::atualizarSenha(const QString &email,
+                                const QString &senha) const {
+  QSqlQuery query;
+
+  query.prepare(QStringLiteral("UPDATE usuario SET senha = ? WHERE email = ?"));
+  query.addBindValue(senha);
+  query.addBindValue(email);
+
+  return query.exec();
+}
+
+bool UsuarioDAO::atualizarIdade(const QString &email,
+                                const QString &idade) const {
+  QSqlQuery query;
+
+  query.prepare(QStringLiteral("UPDATE usuario SET idade = ? WHERE email = ?"));
+  query.addBindValue(idade);
+  query.addBindValue(email);
+
+  return query.exec();
+}
+
+bool UsuarioDAO::atualizarNome(const QString &email,
+                               const QString &nome) const {
+  QSqlQuery query;
+
+  query.prepare(QStringLiteral("UPDATE usuario SET nome = ? WHERE email = ?"));
+  query.addBindValue(nome);
+  query.addBindValue(email);
+
+  return query.exec();
+}
+
+bool UsuarioDAO::atualizarSobrenome(const QString &email,
+                                    const QString &sobrenome) const {
+  QSqlQuery query;
+
+  query.prepare(
+      QStringLiteral("UPDATE usuario SET sobrenome = ? WHERE email = ?"));
+  query.addBindValue(sobrenome);
+  query.addBindValue(email);
+
+  return query.exec();
+}
+
+bool UsuarioDAO::atualizarSaldo(const QString &email, float saldo) const {
+  QSqlQuery query;
+
+  query.prepare(QStringLiteral("UPDATE usuario SET saldo = ? WHERE email = ?"));
+  query.addBindValue(saldo);
+  query.addBindValue(email);
+
+  return query.exec();
 }

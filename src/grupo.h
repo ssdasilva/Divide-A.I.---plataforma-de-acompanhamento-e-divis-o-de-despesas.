@@ -22,7 +22,7 @@ private:
 
   QString m_nome;
 
-  int m_numPessoas;
+  int m_numPessoas = 0;
 };
 
 #endif // GRUPO_H

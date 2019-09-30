@@ -2,15 +2,17 @@
 
 Divida::Divida(QObject *parent) : QObject(parent) {}
 
-qint64 Divida::cpfDevedor() const { return m_cpfDevedor; }
+QString Divida::emailDevedor() const { return m_emailDevedor; }
 
-void Divida::setCpfDevedor(const qint64 &cpfDevedor) {
-  m_cpfDevedor = cpfDevedor;
+void Divida::setEmailDevedor(const QString &emailDevedor) {
+  m_emailDevedor = emailDevedor;
 }
 
-qint64 Divida::cpfCredor() const { return m_cpfCredor; }
+QString Divida::emailCredor() const { return m_emailCredor; }
 
-void Divida::setCpfCredor(const qint64 &cpfCredor) { m_cpfCredor = cpfCredor; }
+void Divida::setEmailCredor(const QString &emailCredor) {
+  m_emailCredor = emailCredor;
+}
 
 int Divida::quantia() const { return m_quantia; }
 

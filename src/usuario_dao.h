@@ -24,6 +24,19 @@ public:
 
   std::unique_ptr<std::vector<std::unique_ptr<Usuario>>>
   usuarios(const QString &email = QString()) const;
+
+  bool atualizarSenha(const QString &email, const QString &senha) const;
+
+  bool atualizarIdade(const QString &idade);
+
+  QString nome() const;
+  void setNome(const QString &nome);
+
+  QString sobrenome() const;
+  void setSobrenome(const QString &sobrenome);
+
+  float saldo() const;
+  void setSaldo(float saldo);
 };
 
 #endif // USUARIO_DAO_H
