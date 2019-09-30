@@ -21,7 +21,9 @@ HEADERS += \
     src/grupo.h \
     src/grupo_dao.h \
     src/usuario.h \
-    src/usuario_dao.h
+    src/usuario_dao.h \
+    src/usuario_grupo.h \
+    src/usuario_grupo_dao.h
 
 SOURCES += \
         src/cadastrar_usuario.cpp \
@@ -32,9 +34,12 @@ SOURCES += \
         src/database_manager.cpp \
         src/grupo.cpp \
         src/usuario.cpp \
-        src/usuario_dao.cpp
+        src/usuario_dao.cpp \
+        src/usuario_grupo.cpp \
+        src/usuario_grupo_dao.cpp
 
-RESOURCES += qml.qrc
+RESOURCES += qml.qrc \
+    imagens.qrc
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =

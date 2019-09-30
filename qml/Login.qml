@@ -9,7 +9,7 @@ Rectangle {
 
     Image {
         id: logo
-        source: "images/Logo.JPG"
+        source: "/images/Logo.JPG"
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: parent.top
     }
