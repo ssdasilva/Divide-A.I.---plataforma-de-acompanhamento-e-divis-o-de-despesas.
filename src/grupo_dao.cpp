@@ -4,15 +4,6 @@
 #include <QSqlQuery>
 #include <QVariant>
 
-bool GrupoDAO::init() const {
-  QSqlQuery query;
-
-  // Monta a query para criar a tabela caso ela ainda não exista
-  return query.exec(QStringLiteral(
-      "CREATE TABLE IF NOT EXISTS grupo (identificador VARCHAR(50) NOT NULL, "
-      "nome VARCHAR(30), numPessoas INT, PRIMARY KEY (identificador))"));
-}
-
 bool GrupoDAO::insertGrupo(const Grupo &grupo) const {
   QSqlQuery query;
 

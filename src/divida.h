@@ -8,11 +8,11 @@ class Divida : public QObject {
 public:
   explicit Divida(QObject *parent = nullptr);
 
-  qint64 cpfDevedor() const;
-  void setCpfDevedor(const qint64 &cpfDevedor);
+  QString emailDevedor() const;
+  void setEmailDevedor(const QString &emailDevedor);
 
-  qint64 cpfCredor() const;
-  void setCpfCredor(const qint64 &cpfCredor);
+  QString emailCredor() const;
+  void setEmailCredor(const QString &emailCredor);
 
   int quantia() const;
   void setQuantia(int quantia);
@@ -24,9 +24,9 @@ public:
   void setCategoria(const QString &categoria);
 
 private:
-  qint64 m_cpfDevedor;
+  QString m_emailDevedor;
 
-  qint64 m_cpfCredor;
+  QString m_emailCredor;
 
   int m_quantia;
 

@@ -4,16 +4,6 @@
 #include <QSqlQuery>
 #include <QVariant>
 
-bool UsuarioDAO::init() const {
-  QSqlQuery query;
-
-  // Monta a query para criar a tabela caso ela ainda não exista
-  return query.exec(QStringLiteral(
-      "CREATE TABLE IF NOT EXISTS usuario (email TEXT NOT NULL, "
-      "senha TEXT NOT NULL, idade TINYINT, nome VARCHAR(30), "
-      "sobrenome VARCHAR(50), saldo FLOAT, PRIMARY KEY (email))"));
-}
-
 bool UsuarioDAO::insertUsuario(const Usuario &usuario) const {
   QSqlQuery query;
 

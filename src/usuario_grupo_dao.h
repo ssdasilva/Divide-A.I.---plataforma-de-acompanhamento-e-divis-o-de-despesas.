@@ -12,8 +12,6 @@ class UsuarioGrupoDAO {
 public:
   UsuarioGrupoDAO() = default;
 
-  bool init() const;
-
   bool insertUsuarioGrupo(const UsuarioGrupo &usuarioGrupo) const;
 
   bool removeUsuarioGrupo(const QString &emailUsuario,

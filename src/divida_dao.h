@@ -12,18 +12,21 @@ class DividaDAO {
 public:
   DividaDAO() = default;
 
-  bool init() const;
-
   bool insertDivida(const Divida &divida) const;
 
-  bool removeDivida(const qint64 &cpfDevedor, const qint64 &cpfCredor) const;
+  bool removeDivida(const QString &emailDevedor,
+                    const QString &emailCredor) const;
 
   bool removeAll() const;
 
   int dividaCount() const;
 
   std::unique_ptr<std::vector<std::unique_ptr<Divida>>>
-  usuarios(const qint64 &cpfDevedor = -1, const qint64 &cpfCredor = -1) const;
+  usuarios(const QString &emailDevedor = QString(),
+           const QString &emailCredor = QString()) const;
+
+  bool atualizarQuantia(QString emailDevedor, QString emailCredor,
+                        int quantia) const;
 };
 
 #endif // DIVIDADAO_H

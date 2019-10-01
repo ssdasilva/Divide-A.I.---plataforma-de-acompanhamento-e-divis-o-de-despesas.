@@ -12,8 +12,6 @@ class UsuarioDAO {
 public:
   UsuarioDAO() = default;
 
-  bool init() const;
-
   bool insertUsuario(const Usuario &usuario) const;
 
   bool removeUsuario(const QString &email) const;
@@ -27,16 +25,13 @@ public:
 
   bool atualizarSenha(const QString &email, const QString &senha) const;
 
-  bool atualizarIdade(const QString &idade);
+  bool atualizarIdade(const QString &email, const QString &idade) const;
 
-  QString nome() const;
-  void setNome(const QString &nome);
+  bool atualizarNome(const QString &email, const QString &Nome) const;
 
-  QString sobrenome() const;
-  void setSobrenome(const QString &sobrenome);
+  bool atualizarSobrenome(const QString &email, const QString &sobrenome) const;
 
-  float saldo() const;
-  void setSaldo(float saldo);
+  bool atualizarSaldo(const QString &email, float saldo) const;
 };
 
 #endif // USUARIO_DAO_H

@@ -4,20 +4,6 @@
 #include <QSqlQuery>
 #include <QVariant>
 
-bool DividaDAO::init() const {
-  QSqlQuery query;
-
-  // Monta a query para criar a tabela caso ela ainda não exista
-  return query.exec(QStringLiteral(
-      "CREATE TABLE IF NOT EXISTS divida (emailDevedor VARCHAR(100) NOT "
-      "NULL, emailCredor VARCHAR(100) NOT NULL, quantia INT NOT NULL, "
-      "tipoMoeda VARCHAR(30), categoria VARCHAR(30), PRIMARY KEY(emailDevedor, "
-      "emailCredor), FOREIGN KEY(emailDevedor) REFERENCES usuario(email) ON "
-      "DELETE "
-      "CASCADE, FOREIGN KEY(emailCredor) REFERENCES usuario(email) ON DELETE "
-      "CASCADE"));
-}
-
 bool DividaDAO::insertDivida(const Divida &divida) const {
   QSqlQuery query;
 
@@ -120,7 +106,7 @@ DividaDAO::usuarios(const QString &emailDevedor,
 }
 
 bool DividaDAO::atualizarQuantia(QString emailDevedor, QString emailCredor,
-                                 int quantia) {
+                                 int quantia) const {
   QSqlQuery query;
 
   query.prepare(QStringLiteral("UPDATE divida SET quantia = ? WHERE "

@@ -4,18 +4,6 @@
 #include <QSqlQuery>
 #include <QVariant>
 
-bool UsuarioGrupoDAO::init() const {
-  QSqlQuery query;
-
-  // Monta a query para criar a tabela caso ela ainda não exista
-  return query.exec(QStringLiteral(
-      "CREATE TABLE IF NOT EXISTS usuarioGrupo (email VARCHAR(100) NOT NULL, "
-      "identificador VARCHAR(50) NOT NULL, PRIMARY KEY (email, identificador), "
-      "FOREIGN KEY (email), REFERENCES usuario(email), ON DELETE CASCADE, "
-      "FOREIGN KEY (identificador) REFERENCES grupo(identificador) ON DELETE "
-      "CASCADE)"));
-}
-
 bool UsuarioGrupoDAO::insertUsuarioGrupo(
     const UsuarioGrupo &usuarioGrupo) const {
   QSqlQuery query;

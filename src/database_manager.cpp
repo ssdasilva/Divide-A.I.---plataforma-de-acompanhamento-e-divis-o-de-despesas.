@@ -29,13 +29,7 @@ DatabaseManager::DatabaseManager()
   m_database->setPort(5432);
   m_database->setDatabaseName("lhdsevbs");
   if (m_database->open()) {
-    m_usuarioDAO.init();
-
-    m_grupoDAO.init();
-
-    m_dividaDAO.init();
-
-    m_usuarioGrupoDAO.init();
+    qDebug() << "Abriu o banco";
   } else
     qDebug() << "Banco não foi aberto";
 }
