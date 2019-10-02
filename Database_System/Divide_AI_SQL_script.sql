@@ -42,12 +42,24 @@ CREATE TABLE Usuario_grupo(
 			ON DELETE CASCADE
 );
     
-CREATE TRIGGER  UPDATE_NUMBER_PEOPLE_GROUP BEFORE INSERT ON usuario_grupo 
-FOR EACH ROW 
-	UPDATE grupo SET Quantidade_pessoas = Quantidade_pessoas + 1 
-    WHERE grupo.identificador = NEW.Identificador;
+CREATE FUNCTION numeroPessoas_gatilho() RETURNS trigger AS $numeroPessoas_gatilho$
+  BEGIN
+		UPDATE grupo SET Quantidade_pessoas = Quantidade_pessoas + 1 
+    	WHERE grupo.identificador = NEW.Identificador;
+	RETURN NEW;
+  END;
+$numeroPessoas_gatilho$ LANGUAGE plpgsql;
+  
+CREATE TRIGGER numeroPessoas_gatilho BEFORE INSERT ON usuario_grupo
+FOR EACH ROW EXECUTE PROCEDURE numeroPessoas_gatilho();
 
-CREATE TRIGGER SET_NUMBER_GROUP_ZERO BEFORE INSERT ON Grupo
-FOR EACH ROW
-	SET new.Quantidade_pessoas = 0;
 
+CREATE FUNCTION SET_NUMBER_GROUP_ZERO () RETURNS trigger AS $SET_NUMBER_GROUP_ZERO$
+  BEGIN
+	NEW.Quantidade_pessoas = 0;
+	RETURN NEW;
+  END;
+$SET_NUMBER_GROUP_ZERO$ LANGUAGE plpgsql;
+  
+CREATE TRIGGER SET_NUMBER_GROUP_ZERO  BEFORE INSERT ON grupo
+FOR EACH ROW EXECUTE PROCEDURE SET_NUMBER_GROUP_ZERO();

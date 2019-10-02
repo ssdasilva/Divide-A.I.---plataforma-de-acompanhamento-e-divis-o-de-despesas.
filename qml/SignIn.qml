@@ -3,12 +3,14 @@ import QtQuick.Controls 2.12
 
 Rectangle{
     id: signInWindow
+
     Image {
             id: logo
-            source: "images/Logo.JPG"
+            source: "/images/Logo.JPG"
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: parent.top
     }
+
     ScrollView {
         id: scroll_bar
         width:  300
@@ -35,6 +37,10 @@ Rectangle{
                  id: name_typed
                  placeholderText: qsTr("Digite seu nome")
                  anchors.verticalCenter: name.verticalCenter
+                 Keys.onPressed:
+                     if (event.key === Qt.Key_Enter ||
+                         event.key === Qt.Key_Return)
+                         registrar()
              }
             }
             Row {
@@ -49,6 +55,10 @@ Rectangle{
                  id: surname_typed
                  placeholderText: qsTr("Digite seu sobrenome")
                  anchors.verticalCenter: surname.verticalCenter
+                 Keys.onPressed:
+                     if (event.key === Qt.Key_Enter ||
+                         event.key === Qt.Key_Return)
+                         registrar()
              }
             }
             Row {
@@ -63,6 +73,10 @@ Rectangle{
                  id: age_typed
                  placeholderText: qsTr("Digite sua idade")
                  anchors.verticalCenter: age.verticalCenter
+                 Keys.onPressed:
+                     if (event.key === Qt.Key_Enter ||
+                         event.key === Qt.Key_Return)
+                         registrar()
              }
             }
             Row {
@@ -78,6 +92,10 @@ Rectangle{
                  placeholderText: qsTr("Digite sua senha")
                  anchors.verticalCenter: password.verticalCenter
                  echoMode: TextInput.Password
+                 Keys.onPressed:
+                     if (event.key === Qt.Key_Enter ||
+                         event.key === Qt.Key_Return)
+                         registrar()
              }
             }
             Row {
@@ -92,10 +110,15 @@ Rectangle{
                  id: email_typed
                  placeholderText: qsTr("Digite seu e-mail")
                  anchors.verticalCenter: email.verticalCenter
+                 Keys.onPressed:
+                     if (event.key === Qt.Key_Enter ||
+                         event.key === Qt.Key_Return)
+                         registrar()
              }
             }
         }
     }
+
     Row {
         id: button_row
         width: 300
@@ -107,9 +130,7 @@ Rectangle{
             y:10
             width: 150
             text: "Registrar"
-            /*onClicked: onClicked: cadastrarUsuario.inserirUsuario("exemplo@gmail.com",
-                                                               "123456", "12",
-                                                               "Fulano", "De Tal", "21")*/
+            onClicked: registrar()
         }
         Button{
             width: 150
@@ -118,6 +139,21 @@ Rectangle{
             onClicked: stack.pop()
         }
     }
+
+    function registrar() {
+        if (name_typed.text == "" || surname_typed.text == "" ||
+                age_typed.text == "" || password_typed.text == "" ||
+                email_typed.text == "")
+             console.log(" Você não preencheu todos os campos");
+        else {
+            // por padrão, ao inserir um usuário novo, seu saldo será zero
+            cadastrarUsuario.inserirUsuario(email_typed.text, password_typed.text, age_typed.text,
+                                                name_typed.text, surname_typed.text, "0");
+            stack.pop()
+        }
+    }
 }
+
+
 
 
