@@ -34,6 +34,7 @@ Item{
             anchors.fill: parent
             acceptedButtons: Qt.LeftButton | Qt.RightButton
             onEntered: parent.opacity = 0.5
+            onExited: parent.opacity = 1
             onClicked: {
                 parent.opacity = 1
                 root.clicouBotao()
