@@ -32,3 +32,9 @@ bool CadastrarUsuario::inserirUsuario(QString email, QString senha,
 
   return inseriu;
 }
+
+bool CadastrarUsuario::senhaCorreta(QString email, QString senha){
+    UsuarioDAO *usuarioDAO = DatabaseManager::instance().usuarioDAO();
+    if (usuarioDAO->usuarios(email)->at(0)->senha() == senha) return true;
+    else return false;
+}

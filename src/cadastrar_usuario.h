@@ -17,6 +17,10 @@ public:
   Q_INVOKABLE bool usuarioExiste(QString email); // retorna true se o
                                                  // usuário já existe e
                                                  // false se não existe
+
+  Q_INVOKABLE bool senhaCorreta(QString email, QString senha);
+    //retorna true se o usuário do email passado como parâmetro tem como
+    //senha a senha passada como parâmetro. Retorna false caso contrário
 };
 
 #endif // CADASTRARUSUARIO_H
