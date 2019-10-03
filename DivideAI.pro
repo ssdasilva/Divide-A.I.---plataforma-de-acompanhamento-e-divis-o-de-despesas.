@@ -25,6 +25,7 @@ HEADERS += \
     src/manejar_despesa.h \
     src/salvar_usuario.h \
     src/secao_usuario.h \
+    src/perfil_usuario.h \
     src/usuario.h \
     src/usuario_dao.h \
     src/usuario_grupo.h \
@@ -43,6 +44,7 @@ SOURCES += \
         src/manejar_despesa.cpp \
         src/salvar_usuario.cpp \
         src/secao_usuario.cpp \
+        src/perfil_usuario.cpp \
         src/usuario.cpp \
         src/usuario_dao.cpp \
         src/usuario_grupo.cpp \

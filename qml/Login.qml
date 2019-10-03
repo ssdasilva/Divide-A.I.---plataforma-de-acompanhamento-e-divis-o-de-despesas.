@@ -143,6 +143,7 @@ Rectangle {
                     console.log(email)
                     secaoUsuario.setEmailLogado(email)
                     salvar_usuario.save(email,senha)
+                    perfilUsuario.init()
                     stack.push(mainDashboard_View)
                 } else {
                     hideEmailAlert()
@@ -190,6 +191,7 @@ Rectangle {
             console.log("Há e-mail e senha válidos no arquivo de configuração")
             console.log(salvar_usuario.loadEmail())
             secaoUsuario.setEmailLogado(salvar_usuario.loadEmail())
+            perfilUsuario.init()
             stack.push(mainDashboard_View)
         }
     }

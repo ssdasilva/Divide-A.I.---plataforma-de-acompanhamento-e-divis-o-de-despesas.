@@ -5,7 +5,7 @@ import QtQuick.Layouts 1.3
 
 Item{
     id: root
-    property color corBotao: "darkgreen"
+    property color corBotao: "#0f9ad3"
     property color corTexto: "white"
     property string textoBotao: "Clique aqui"
     property int lbFonte: 15

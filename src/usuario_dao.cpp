@@ -80,9 +80,9 @@ UsuarioDAO::usuarios(const QString &email) const {
 
     usuario->setEmail(query.value(0).toString());
     usuario->setSenha(query.value(1).toString());
-    usuario->setIdade(query.value(2).toInt());
-    usuario->setNome(query.value(3).toString());
-    usuario->setSobrenome(query.value(4).toString());
+    usuario->setNome(query.value(2).toString());
+    usuario->setSobrenome(query.value(3).toString());
+    usuario->setIdade(query.value(4).toInt());
     usuario->setSaldo(query.value(5).toFloat());
 
     // Move o unique_ptr<Usuario> para a lista de tal forma que ele pertença
@@ -106,7 +106,7 @@ bool UsuarioDAO::atualizarSenha(const QString &email,
 }
 
 bool UsuarioDAO::atualizarIdade(const QString &email,
-                                const QString &idade) const {
+                                const qint8 &idade) const {
   QSqlQuery query;
 
   query.prepare(QStringLiteral("UPDATE usuario SET idade = ? WHERE email = ?"));
@@ -144,6 +144,15 @@ bool UsuarioDAO::atualizarSaldo(const QString &email, float saldo) const {
 
   query.prepare(QStringLiteral("UPDATE usuario SET saldo = ? WHERE email = ?"));
   query.addBindValue(saldo);
+  query.addBindValue(email);
+
+  return query.exec();
+}
+
+float UsuarioDAO::getSaldo(const QString &email) const {
+  QSqlQuery query;
+
+  query.prepare(QStringLiteral("SELECT saldo FROM usuario WHERE email = ?"));
   query.addBindValue(email);
 
   return query.exec();

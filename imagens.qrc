@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file>images/Logo.JPG</file>
+        <file>images/account-circle.png</file>
     </qresource>
 </RCC>

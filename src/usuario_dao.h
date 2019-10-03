@@ -25,13 +25,15 @@ public:
 
   bool atualizarSenha(const QString &email, const QString &senha) const;
 
-  bool atualizarIdade(const QString &email, const QString &idade) const;
+  bool atualizarIdade(const QString &email, const qint8 &idade) const;
 
   bool atualizarNome(const QString &email, const QString &Nome) const;
 
   bool atualizarSobrenome(const QString &email, const QString &sobrenome) const;
 
   bool atualizarSaldo(const QString &email, float saldo) const;
+
+  float getSaldo(const QString &email) const;
 };
 
 #endif // USUARIO_DAO_H

@@ -6,6 +6,7 @@
 #include "manejar_despesa.h"
 #include "secao_usuario.h"
 #include "salvar_usuario.h"
+#include "perfil_usuario.h"
 
 int main(int argc, char *argv[]) {
   QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
@@ -26,18 +27,18 @@ int main(int argc, char *argv[]) {
                                            cadastrarUsuario);
 
   Secao_usuario *secaoUsuario = new Secao_usuario();
-  engine.rootContext()->setContextProperty("secaoUsuario",
-                                           secaoUsuario);
+  engine.rootContext()->setContextProperty("secaoUsuario", secaoUsuario);
 
   Manejar_despesa *manejarDespesa = new Manejar_despesa();
-  engine.rootContext()->setContextProperty("manejarDespesa",
-                                           manejarDespesa);
+  engine.rootContext()->setContextProperty("manejarDespesa", manejarDespesa);
 
   Salvar_usuario *salvar_usuario = new Salvar_usuario();
-  engine.rootContext()->setContextProperty("salvar_usuario",
-                                           salvar_usuario);
+  engine.rootContext()->setContextProperty("salvar_usuario", salvar_usuario);
 
-  //salvar_usuario->deleteSettings();
+  PerfilUsuario *perfilUsuario = new PerfilUsuario();
+  engine.rootContext()->setContextProperty("perfilUsuario", perfilUsuario);
+
+  // salvar_usuario->deleteSettings();
 
   engine.load(url);
 

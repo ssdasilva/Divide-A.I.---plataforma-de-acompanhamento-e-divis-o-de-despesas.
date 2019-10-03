@@ -28,7 +28,7 @@ Rectangle {
 
             Button {
                 id: groupButton
-                width: parent.width/2
+                width: parent.width/3
                 height: parent.height
                 text: qsTr("Grupos")
                 font.bold: true
@@ -38,12 +38,22 @@ Rectangle {
 
             Button {
                 id: expensesButton
-                width: parent.width/2
+                width: parent.width/3
                 height: parent.height
                 text: qsTr("Dívidas")
                 font.bold: true
                 font.pointSize: 15
                 onClicked: setflag(0)
+            }
+
+            Button {
+                id: perfilUsuarioButton
+                width: parent.width/3
+                height: parent.height
+                text: qsTr("Perfil")
+                font.bold: true
+                font.pointSize: 15
+                onClicked: setflag(2)
             }
         }
 
@@ -354,6 +364,18 @@ Rectangle {
 
         }
 
+        Column{
+            id: perfilUsuarioContent
+            y: 0
+            height: scroll_bar.height
+            width: scroll_bar.width
+            anchors.top: parent.top
+            visible: false
+
+            PerfilUsuario{
+
+            }
+        }
 
     }
 
@@ -385,13 +407,27 @@ Rectangle {
 
 
     function setflag(mudaFlag) {
-        if (mudaFlag === 1) {
-            groupContent.visible = true
-            expensesContent.visible = false
-        }
-        else {
-            groupContent.visible = false
-            expensesContent.visible = true
+        switch(mudaFlag){
+        case 0:
+            groupContent.visible = false;
+            expensesContent.visible = true;
+            perfilUsuarioContent.visible = false;
+            break;
+
+        case 1:
+            groupContent.visible = true;
+            expensesContent.visible = false;
+            perfilUsuarioContent.visible = false;
+            break;
+
+        case 2:
+            groupContent.visible = false;
+            expensesContent.visible = false;
+            perfilUsuarioContent.visible = true;
+            break;
+
+        default:
+            break;
         }
     }
 

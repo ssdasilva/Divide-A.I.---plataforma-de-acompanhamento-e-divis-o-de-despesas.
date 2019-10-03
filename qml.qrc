@@ -5,6 +5,7 @@
         <file>qml/SignIn.qml</file>
         <file>qml/NewExpense.qml</file>
         <file>qml/MainDashboard.qml</file>
-        <file>qml/Componentes/Botao.qml</file>
+        <file>qml/PerfilUsuario.qml</file>
+        <file>qml/Botao.qml</file>
     </qresource>
 </RCC>
