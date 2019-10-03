@@ -14,8 +14,8 @@ Rectangle{
     ScrollView {
         id: scroll_bar
         width:  300
-        height: ((parent.height - logo.height - button_row.height) < 250) ?
-                    parent.height - logo.height - button_row.height: 250
+        height: ((parent.height - logo.height - bottom_column.height) < 250) ?
+                    parent.height - logo.height - bottom_column.height: 250
         clip: true
         anchors.top: logo.bottom
         anchors.horizontalCenter: parent.horizontalCenter
@@ -119,24 +119,35 @@ Rectangle{
         }
     }
 
-    Row {
-        id: button_row
-        width: 300
-        height: 100
-        spacing: 10
-        anchors.top: scroll_bar.bottom
-        anchors.horizontalCenter: parent.horizontalCenter
-        Button{
-            y:10
-            width: 150
-            text: "Registrar"
-            onClicked: registrar()
+    Column {
+            id: bottom_column
+            spacing: 10
+            width: 300
+            height: 80
+            anchors.top: scroll_bar.bottom
+            anchors.horizontalCenter: parent.horizontalCenter
+        Row {
+            id: button_row
+            spacing: 10
+            Button{
+                y:10
+                width: 150
+                text: "Registrar"
+                onClicked: registrar()
+            }
+            Button{
+                width: 150
+                y:10
+                text: "Voltar"
+                onClicked: stack.pop()
+            }
         }
-        Button{
-            width: 150
-            y:10
-            text: "Voltar"
-            onClicked: stack.pop()
+        Text{
+            id: error_message
+            anchors.horizontalCenter: parent.horizontalCenter
+            visible: false
+            color: 'red'
+            text: qsTr("Você não preencheu todos os campos")
         }
     }
 
@@ -144,7 +155,7 @@ Rectangle{
         if (name_typed.text == "" || surname_typed.text == "" ||
                 age_typed.text == "" || password_typed.text == "" ||
                 email_typed.text == "")
-             console.log(" Você não preencheu todos os campos");
+            error_message.visible = true;
         else {
             // por padrão, ao inserir um usuário novo, seu saldo será zero
             cadastrarUsuario.inserirUsuario(email_typed.text, password_typed.text, age_typed.text,
