@@ -13,7 +13,7 @@ Window {
     title: qsTr("Divide AI")
     StackView {
         id: stack
-        initialItem: mainDashboard_View
+        initialItem: login_View
         anchors.fill: parent
     }
     Component {

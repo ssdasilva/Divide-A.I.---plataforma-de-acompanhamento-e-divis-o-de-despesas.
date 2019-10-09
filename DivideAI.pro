@@ -20,6 +20,7 @@ HEADERS += \
     src/divida_dao.h \
     src/grupo.h \
     src/grupo_dao.h \
+    src/manejar_despesa.h \
     src/usuario.h \
     src/usuario_dao.h \
     src/usuario_grupo.h \
@@ -33,6 +34,7 @@ SOURCES += \
         src/main.cpp \
         src/database_manager.cpp \
         src/grupo.cpp \
+        src/manejar_despesa.cpp \
         src/usuario.cpp \
         src/usuario_dao.cpp \
         src/usuario_grupo.cpp \

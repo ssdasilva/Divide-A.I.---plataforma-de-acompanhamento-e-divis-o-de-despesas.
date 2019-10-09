@@ -3,6 +3,7 @@
 #include <QQmlContext>
 
 #include "cadastrar_usuario.h"
+#include "manejar_despesa.h"
 
 int main(int argc, char *argv[]) {
   QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
@@ -22,6 +23,10 @@ int main(int argc, char *argv[]) {
   CadastrarUsuario *cadastrarUsuario = new CadastrarUsuario();
   engine.rootContext()->setContextProperty("cadastrarUsuario",
                                            cadastrarUsuario);
+
+  Manejar_despesa *manejarDespesa = new Manejar_despesa();
+  engine.rootContext()->setContextProperty("manejarDespesa",
+                                           manejarDespesa);
 
   return app.exec();
 }
