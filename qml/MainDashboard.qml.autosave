@@ -73,7 +73,7 @@ Rectangle {
                 id: group1
                 height: 100
                 width: parent.width
-                //anchors.centerIn: parent.Center
+                anchors.centerIn: parent.Center
 
                 Image {
                     id: group1_image
