@@ -137,6 +137,8 @@ Rectangle {
             } else {
                 var isPasswordCorrect = cadastrarUsuario.senhaCorreta(email, senha)
                 if (isPasswordCorrect) {
+                    console.log(email)
+                    secaoUsuario.setEmailLogado(email)
                     stack.push(mainDashboard_View)
                 } else {
                     hideEmailAlert()

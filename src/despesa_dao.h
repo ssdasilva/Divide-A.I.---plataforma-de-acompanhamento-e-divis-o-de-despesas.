@@ -23,6 +23,8 @@ public:
 
     int despesaCount() const;
 
+    qint8 despesaCountUsuario(const QString &email) const;
+
     std::unique_ptr<std::vector<std::unique_ptr<Despesa>>>
     usuarios(const QString &email = QString()) const;
 

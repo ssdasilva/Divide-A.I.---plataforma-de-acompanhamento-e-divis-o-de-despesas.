@@ -1,21 +1,42 @@
 #include "manejar_despesa.h"
-#include "divida.h"
-#include "divida_dao.h"
+#include "despesa.h"
+#include "despesa_dao.h"
 #include "usuario_dao.h"
 #include "database_manager.h"
 
+#include <QDebug>
+
 Manejar_despesa::Manejar_despesa(QObject *parent) : QObject(parent) {}
 
-/*bool Manejar_despesa::inserirDespesa(QString email, QString descricao,
-                    QString data, QString moeda,
-                    QString categoria, QString frequencia){
-   std::unique_ptr<std::vector<std::unique_ptr<Usuario>>> usuario;
-   // usuario = getActiveUser();
+bool Manejar_despesa::inserirDespesa(QString email, QString descricao,
+                    QString data, QString moeda, QString categoria,
+                    QString frequencia, QString quantia){
 
-   return false;
-}*/
+   Despesa despesa;
+
+   DespesaDAO *despesaDAO = DatabaseManager::instance().despesaDAO();
+
+   despesa.setEmail(email);
+   despesa.setDescricao(descricao);
+   despesa.setData(data);
+   despesa.setMoeda(moeda);
+   despesa.setCategoria(categoria);
+   despesa.setFrequencia(frequencia);
+   despesa.setQuantia(quantia.toInt());
+
+   bool inseriu = despesaDAO->insertDespesa(despesa);
+
+   return inseriu;
+}
 
 /*bool Manejar_despesa::removerDespesa(QString email, QString descricao){
 
     return false;
 }*/
+
+qint8 Manejar_despesa::quantidadeDespesasUsuario(QString email){
+    DespesaDAO *despesaDAO = DatabaseManager::instance().despesaDAO();
+    qint8 quantidade = despesaDAO->despesaCountUsuario(email);
+    qDebug() << quantidade;
+    return quantidade;
+};

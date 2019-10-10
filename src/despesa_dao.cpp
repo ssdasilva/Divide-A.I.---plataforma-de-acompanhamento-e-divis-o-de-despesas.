@@ -2,16 +2,19 @@
 #include "despesa.h"
 
 #include <QSqlQuery>
+#include <QSqlError>
 #include <QVariant>
+#include <QDebug>
 
 bool DespesaDAO::insertDespesa(const Despesa &divida) const {
     QSqlQuery query;
 
     // Monta a query com o uso de REPLACE de tal forma que a despesa será
     // inserida se não existir, caso contrário, será atualizada
-    query.prepare(
-        QStringLiteral("INSERT INTO despesa (email, descricao, data, "
-                       "moeda, categoria, frequencia) VALUES (?, ?, ?, ?, ?, ?)"));
+    query.prepare( QStringLiteral(
+        "INSERT INTO despesa (email, descricao, data, "
+        "moeda, categoria, frequencia, quantia) "
+        "VALUES (?, ?, ?, ?, ?, ?, ?)"));
 
     query.addBindValue(divida.getEmail());
     query.addBindValue(divida.getDescricao());
@@ -21,7 +24,13 @@ bool DespesaDAO::insertDespesa(const Despesa &divida) const {
     query.addBindValue(divida.getFrequencia());
     query.addBindValue(divida.getQuantia());
 
-    return query.exec();
+    qDebug() << query.lastQuery();
+
+    bool x = query.exec();
+
+    qDebug() << query.lastError().text();
+
+    return x;
 }
 
 bool DespesaDAO::removeDespesa(const QString &email,
@@ -29,7 +38,7 @@ bool DespesaDAO::removeDespesa(const QString &email,
     QSqlQuery query;
 
     query.prepare(QStringLiteral(
-        "DELETE FROM divida WHERE email = ? AND descricao = ?"));
+        "DELETE FROM despesa WHERE email = ? AND descricao = ?"));
     query.addBindValue(email);
     query.addBindValue(descricao);
 
@@ -59,6 +68,22 @@ int DespesaDAO::despesaCount() const{
     QSqlQuery query;
 
     query.prepare(QStringLiteral("SELECT COUNT(*) FROM despesa"));
+
+    query.exec();
+
+    if (query.next()) {
+      return query.value(0).toInt();
+    }
+
+    return 0;
+}
+
+qint8 DespesaDAO::despesaCountUsuario(const QString &email) const{
+    QSqlQuery query;
+
+    query.prepare(QStringLiteral(
+        "SELECT COUNT(*) FROM despesa WHERE email = ?"));
+    query.addBindValue(email);
 
     query.exec();
 
@@ -100,7 +125,7 @@ DespesaDAO::usuarios(const QString &email) const{
       despesa->setMoeda(query.value(3).toString());
       despesa->setCategoria(query.value(4).toString());
       despesa->setFrequencia(query.value(5).toString());
-      despesa->setQuantia(query.value(6).toString());
+      despesa->setQuantia(query.value(6).toInt());
 
       // Move o unique_ptr<Divida> para a lista de tal forma que ele pertença
       // à lista e não ao escopo atual. Dessa forma 'divida' não será deletado

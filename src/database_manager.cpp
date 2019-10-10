@@ -43,3 +43,5 @@ DividaDAO *DatabaseManager::dividaDAO() { return &m_dividaDAO; }
 UsuarioGrupoDAO *DatabaseManager::usuarioGrupoDAO() {
   return &m_usuarioGrupoDAO;
 }
+
+DespesaDAO *DatabaseManager::despesaDAO() { return &m_despesaDAO; }

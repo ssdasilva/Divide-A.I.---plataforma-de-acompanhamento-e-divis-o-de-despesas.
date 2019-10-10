@@ -24,8 +24,8 @@ Rectangle {
         ScrollView {
             id: scroll_bar
             width:  320
-            height: ((parent.height - title.height - button_row.height) < 320) ?
-                        parent.height - title.height - button_row.height : 320
+            height: ((parent.height - title.height - button_row.height) < 420) ?
+                        parent.height - title.height - button_row.height : 420
             clip: true
             anchors.top: title.bottom
 
@@ -38,8 +38,8 @@ Rectangle {
                 spacing: 10
                 y: scroll_bar.y_mainColumn
                 Row {
-                    id: row1
-                    height: 53
+                    id: rowName
+                    height: 50
                     spacing: 10
                     Text {
                         id: name
@@ -54,7 +54,41 @@ Rectangle {
                     }
                 }
                 Row {
-                    id: row2
+                    id: rowExpenseType
+                    height: 30
+                    spacing: 10
+                    Text {
+                        id: expenseType
+                        text: qsTr("Tipo de despesa")
+                        width: scroll_bar.textMessages_width
+                    }
+                    Rectangle {
+                        anchors.verticalCenter: expenseType.verticalCenter
+                        width: scroll_bar.input_width
+                        height: scroll_bar.input_height
+                        Row {
+                            id: rowExpenseTypeRadioButton
+                            spacing: -30
+                            RadioButton {
+                                id: expenseType_expense_radio_button
+                                checked: true
+                                text: qsTr("Despesa")
+                                transformOrigin: Item.Left
+                                scale: 0.6
+                                font.pointSize: 16
+                            }
+                            RadioButton {
+                                id: expenseType_gain_radio_button
+                                text: qsTr("Entrada")
+                                transformOrigin: Item.Left
+                                scale: 0.6
+                                font.pointSize: 16
+                            }
+                        }
+                    }
+                }
+                Row {
+                    id: rowDate
                     spacing: 10
                     Text {
                         id: date
@@ -76,7 +110,7 @@ Rectangle {
                     }
                 }
                 Row {
-                    id: row3
+                    id: rowCurrency
                     spacing: 10
                     Text {
                         id: currency
@@ -95,7 +129,7 @@ Rectangle {
                     }
                 }
                 Row {
-                    id: row4
+                    id: rowCategory
                     spacing: 10
                     Text {
                         id: category
@@ -114,7 +148,7 @@ Rectangle {
                     }
                 }
                 Row {
-                    id: row5
+                    id: rowRecurrentExpense
                     height: 20
                     spacing: 10
                     Text {
@@ -127,7 +161,7 @@ Rectangle {
                         width: scroll_bar.input_width
                         height: scroll_bar.input_height
                         Row {
-                            id: radioButtonRow
+                            id: rowRecurrentExpenseRadioButton
                             spacing: 10
                             RadioButton {
                                 id: recurrentExpense_no_radio_button
@@ -150,9 +184,9 @@ Rectangle {
                     }
                 }
                 Row {
-                    id: row6
+                    id: rowFrequency
                     spacing: 10
-                    height: 75
+                    height: 54
                     Text {
                         id: frequency
                         text: qsTr("Selecione a<br/>frequência de<br/>cobrança")
@@ -175,6 +209,25 @@ Rectangle {
                         }
                     }
                 }
+                Row {
+                    id: rowAmount
+                    spacing: 10
+                    height: 75
+                    Text {
+                        id: amount
+                        text: qsTr("Quantia")
+                        width: scroll_bar.textMessages_width
+                    }
+                    TextField {
+                        id: amount_typed
+                        placeholderText: qsTr("Insira um valor")
+                        anchors.verticalCenter: amount.verticalCenter
+                        onEditingFinished: {
+                            if (isNaN(parseInt(amount_typed.text)))
+                                amount_typed.text = ""
+                        }
+                    }
+                }
             }
         }
         Row {
@@ -188,13 +241,13 @@ Rectangle {
                 y:10
                 width: 150
                 text: "Confirmar"
-                onClicked: stack.pop()
+                onClicked: confirm()
             }
             Button {
                 y:10
                 width: 150
                 text: "Cancelar"
-                onClicked: stack.pop()
+                onClicked: cancel()
             }
         }
         Rectangle {
@@ -224,6 +277,7 @@ Rectangle {
         recurrentExpense_no_radio_button.enabled = false
         recurrentExpense_yes_radio_button.enabled = false
         frequency_combo_box.enabled = false
+        amount_typed.enabled = false
     }
     function enableAllInputs() {
         name_typed.enabled = true
@@ -235,5 +289,46 @@ Rectangle {
         if (recurrentExpense_yes_radio_button.checked == true){
             frequency_combo_box.enabled = true
         }
+        amount_typed.enabled = true
+    }
+    function confirm() {
+        var email = secaoUsuario.getEmailLogado()
+        var description = name_typed.text
+        var date = date_selected.text
+        var currency = currency_combo_box.currentText
+        var category = category_combo_box.currentText
+        var frequency
+        if (recurrentExpense_yes_radio_button.checked)
+            frequency = frequency_combo_box.currentText
+        else
+            frequency = ""
+        var amount = amount_typed.text
+        if (amount === "") amount = "0"
+        if (expenseType_gain_radio_button.checked) amount *= -1
+        var x = manejarDespesa.inserirDespesa(email, description, date, currency,
+                                      category, frequency, amount)
+        console.log(x)
+        clearInputs()
+        var quantidade = manejarDespesa.quantidadeDespesasUsuario(email)
+        console.log(quantidade)
+        stack.pop()
+    }
+
+    function cancel() {
+        clearInputs()
+        stack.pop()
+    }
+
+    function clearInputs() {
+        name_typed.text = ""
+        expenseType_expense_radio_button.checked = true
+        expenseType_gain_radio_button.checked = false
+        date_selected.text = ""
+        currency_combo_box.currentIndex = 0
+        category_combo_box.currentIndex = 0
+        recurrentExpense_no_radio_button.checked = true
+        recurrentExpense_yes_radio_button.checked = false
+        frequency_combo_box.currentIndex = 0
+        amount_typed.text = ""
     }
 }

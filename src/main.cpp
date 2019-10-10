@@ -4,6 +4,7 @@
 
 #include "cadastrar_usuario.h"
 #include "manejar_despesa.h"
+#include "secao_usuario.h"
 
 int main(int argc, char *argv[]) {
   QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
@@ -23,6 +24,10 @@ int main(int argc, char *argv[]) {
   CadastrarUsuario *cadastrarUsuario = new CadastrarUsuario();
   engine.rootContext()->setContextProperty("cadastrarUsuario",
                                            cadastrarUsuario);
+
+  Secao_usuario *secaoUsuario = new Secao_usuario();
+  engine.rootContext()->setContextProperty("secaoUsuario",
+                                           secaoUsuario);
 
   Manejar_despesa *manejarDespesa = new Manejar_despesa();
   engine.rootContext()->setContextProperty("manejarDespesa",

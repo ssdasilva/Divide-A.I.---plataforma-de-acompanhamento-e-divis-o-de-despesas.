@@ -20,5 +20,5 @@ void Despesa::setCategoria(const QString &value) { categoria = value; }
 QString Despesa::getFrequencia() const { return frequencia; }
 void Despesa::setFrequencia(const QString &value) { frequencia = value; }
 
-QString Despesa::getQuantia() const { return quantia; }
-void Despesa::setQuantia(const QString &value) { quantia = value; }
+qint8 Despesa::getQuantia() const { return quantia; }
+void Despesa::setQuantia(const qint8 &value) { quantia = value; }
