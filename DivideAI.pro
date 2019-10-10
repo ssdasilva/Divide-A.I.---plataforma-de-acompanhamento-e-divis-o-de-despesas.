@@ -16,6 +16,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 HEADERS += \
     src/cadastrar_usuario.h \
     src/database_manager.h \
+    src/despesa.h \
+    src/despesa_dao.h \
     src/divida.h \
     src/divida_dao.h \
     src/grupo.h \
@@ -28,6 +30,8 @@ HEADERS += \
 
 SOURCES += \
         src/cadastrar_usuario.cpp \
+        src/despesa.cpp \
+        src/despesa_dao.cpp \
         src/divida.cpp \
         src/divida_dao.cpp \
         src/grupo_dao.cpp \

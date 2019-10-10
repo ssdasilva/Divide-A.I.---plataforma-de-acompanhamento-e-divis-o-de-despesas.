@@ -111,11 +111,13 @@ Rectangle {
             width: 150
             anchors.horizontalCenter: parent.horizontalCenter
             text: qsTr("Quero me cadastrar")
-            onClicked: stack.push(signIn_View)
+            onClicked: {
+                showSignInView()
+            }
             Keys.onPressed: {
                 if (event.key === Qt.Key_Enter ||
                     event.key === Qt.Key_Return) {
-                    stack.push(signIn_View)
+                    showSignInView()
                 }
             }
         }
@@ -168,6 +170,12 @@ Rectangle {
         password_alert_text.visible = false
         password_alert_text.height = 0
         row2.height = 40
+    }
+
+    function showSignInView() {
+        stack.push(signIn_View)
+        hideEmailAlert()
+        hidePasswordAlert()
     }
 }
 
