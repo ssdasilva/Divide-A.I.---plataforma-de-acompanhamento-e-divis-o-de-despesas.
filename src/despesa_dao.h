@@ -26,7 +26,8 @@ public:
     std::unique_ptr<std::vector<std::unique_ptr<Despesa>>>
     usuarios(const QString &email = QString()) const;
 
-    bool atualizarQuantia(QString email, int quantia) const;
+    bool atualizarQuantia(QString email, QString descricao,
+                          int quantia) const;
 };
 
 #endif // DESPESA_DAO_H

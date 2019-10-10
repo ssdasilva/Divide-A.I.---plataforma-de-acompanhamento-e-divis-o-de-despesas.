@@ -30,6 +30,17 @@ CREATE TABLE Divida(
             ON DELETE CASCADE
 );
 
+CREATE TABLE Despesa(
+    Email VARCHAR(100) NOT NULL,
+    Descricao VARCHAR(100) NOT NULL,
+    Data, VARCHAR(10) NOT NULL,
+    Tipo_moeda VARCHAR(30),
+    Categoria VARCHAR(30),
+    Frequencia VARCHAR(30),
+    Quantia INT NOT NULL,
+    PRIMARY KEY (Email)
+)
+
 CREATE TABLE Usuario_grupo(
 	Email VARCHAR(100) NOT NULL,
 	Identificador VARCHAR(50) NOT NULL,

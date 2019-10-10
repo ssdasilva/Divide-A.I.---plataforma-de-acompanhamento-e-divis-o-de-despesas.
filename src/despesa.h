@@ -26,6 +26,9 @@ public:
     QString getFrequencia() const;
     void setFrequencia(const QString &value);
 
+    QString getQuantia() const;
+    void setQuantia(const QString &value);
+
 private:
     QString email;
     QString descricao;
@@ -33,6 +36,7 @@ private:
     QString moeda;
     QString categoria;
     QString frequencia;
+    QString quantia;
 };
 
 #endif // DESPESA_H
