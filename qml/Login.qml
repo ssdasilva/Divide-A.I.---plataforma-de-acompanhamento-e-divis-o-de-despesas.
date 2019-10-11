@@ -7,6 +7,9 @@ Rectangle {
     width: parent.width
     height: parent.height
 
+    //Verifica se tem um e-mail válido no arquivo de configuração
+    Component.onCompleted: checkSettings()
+
     Image {
         id: logo
         source: "/images/Logo.JPG"
@@ -139,6 +142,7 @@ Rectangle {
                 if (isPasswordCorrect) {
                     console.log(email)
                     secaoUsuario.setEmailLogado(email)
+                    salvar_usuario.save(email,senha)
                     stack.push(mainDashboard_View)
                 } else {
                     hideEmailAlert()
@@ -178,6 +182,16 @@ Rectangle {
         stack.push(signIn_View)
         hideEmailAlert()
         hidePasswordAlert()
+    }
+
+    function checkSettings(){
+        if (cadastrarUsuario.senhaCorreta(salvar_usuario.loadEmail(),
+                                          salvar_usuario.loadPassword())) {
+            console.log("Há e-mail e senha válidos no arquivo de configuração")
+            console.log(salvar_usuario.loadEmail())
+            secaoUsuario.setEmailLogado(salvar_usuario.loadEmail())
+            stack.push(mainDashboard_View)
+        }
     }
 }
 

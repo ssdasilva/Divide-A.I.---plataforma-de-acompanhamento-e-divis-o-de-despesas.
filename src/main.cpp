@@ -5,6 +5,7 @@
 #include "cadastrar_usuario.h"
 #include "manejar_despesa.h"
 #include "secao_usuario.h"
+#include "salvar_usuario.h"
 
 int main(int argc, char *argv[]) {
   QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
@@ -18,7 +19,6 @@ int main(int argc, char *argv[]) {
                      if (!obj && url == objUrl)
                        QCoreApplication::exit(-1);
                    }, Qt::QueuedConnection);
-  engine.load(url);
 
   // Expõe o c++ para o qml
   CadastrarUsuario *cadastrarUsuario = new CadastrarUsuario();
@@ -32,6 +32,14 @@ int main(int argc, char *argv[]) {
   Manejar_despesa *manejarDespesa = new Manejar_despesa();
   engine.rootContext()->setContextProperty("manejarDespesa",
                                            manejarDespesa);
+
+  Salvar_usuario *salvar_usuario = new Salvar_usuario();
+  engine.rootContext()->setContextProperty("salvar_usuario",
+                                           salvar_usuario);
+
+  //salvar_usuario->deleteSettings();
+
+  engine.load(url);
 
   return app.exec();
 }

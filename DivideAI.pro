@@ -23,6 +23,7 @@ HEADERS += \
     src/grupo.h \
     src/grupo_dao.h \
     src/manejar_despesa.h \
+    src/salvar_usuario.h \
     src/secao_usuario.h \
     src/usuario.h \
     src/usuario_dao.h \
@@ -40,6 +41,7 @@ SOURCES += \
         src/database_manager.cpp \
         src/grupo.cpp \
         src/manejar_despesa.cpp \
+        src/salvar_usuario.cpp \
         src/secao_usuario.cpp \
         src/usuario.cpp \
         src/usuario_dao.cpp \
