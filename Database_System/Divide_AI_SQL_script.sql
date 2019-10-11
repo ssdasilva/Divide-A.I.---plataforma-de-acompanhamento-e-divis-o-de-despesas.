@@ -38,7 +38,10 @@ CREATE TABLE Despesa(
     Categoria VARCHAR(30),
     Frequencia VARCHAR(30),
     Quantia INT NOT NULL,
-    PRIMARY KEY (Email)
+    PRIMARY KEY (Email , Descricao),
+    FOREIGN KEY (Email)
+		REFERENCES Usuario (Email)
+            ON DELETE CASCADE
 );
 
 CREATE TABLE Usuario_grupo(

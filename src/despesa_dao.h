@@ -12,14 +12,12 @@ class DespesaDAO {
 public:
     DespesaDAO() = default;
 
-    bool insertDespesa(const Despesa &divida) const;
+    bool insertDespesa(const Despesa &despesa) const;
 
     bool removeDespesa(const QString &email,
                        const QString &descricao) const;
 
     bool removeAll() const;
-
-    bool removeAllUsuario(const QString &email) const;
 
     int despesaCount() const;
 

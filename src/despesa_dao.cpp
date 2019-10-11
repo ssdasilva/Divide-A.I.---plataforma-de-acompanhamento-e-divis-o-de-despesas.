@@ -6,7 +6,7 @@
 #include <QVariant>
 #include <QDebug>
 
-bool DespesaDAO::insertDespesa(const Despesa &divida) const {
+bool DespesaDAO::insertDespesa(const Despesa &despesa) const {
     QSqlQuery query;
 
     // Monta a query com o uso de REPLACE de tal forma que a despesa será
@@ -16,19 +16,15 @@ bool DespesaDAO::insertDespesa(const Despesa &divida) const {
         "moeda, categoria, frequencia, quantia) "
         "VALUES (?, ?, ?, ?, ?, ?, ?)"));
 
-    query.addBindValue(divida.getEmail());
-    query.addBindValue(divida.getDescricao());
-    query.addBindValue(divida.getData());
-    query.addBindValue(divida.getMoeda());
-    query.addBindValue(divida.getCategoria());
-    query.addBindValue(divida.getFrequencia());
-    query.addBindValue(divida.getQuantia());
-
-    qDebug() << query.lastQuery();
+    query.addBindValue(despesa.getEmail());
+    query.addBindValue(despesa.getDescricao());
+    query.addBindValue(despesa.getData());
+    query.addBindValue(despesa.getMoeda());
+    query.addBindValue(despesa.getCategoria());
+    query.addBindValue(despesa.getFrequencia());
+    query.addBindValue(despesa.getQuantia());
 
     bool x = query.exec();
-
-    qDebug() << query.lastError().text();
 
     return x;
 }
@@ -52,17 +48,6 @@ bool DespesaDAO::removeAll() const {
 
     return query.exec();
 }
-
-bool DespesaDAO::removeAllUsuario(const QString &email) const {
-    QSqlQuery query;
-
-    query.prepare(QStringLiteral(
-        "DELETE FROM divida WHERE email = ?"));
-    query.addBindValue(email);
-
-    return query.exec();
-}
-
 
 int DespesaDAO::despesaCount() const{
     QSqlQuery query;
@@ -99,19 +84,19 @@ DespesaDAO::usuarios(const QString &email) const{
     QSqlQuery query;
 
     // Verifica se os codigos de despesa foi especificado para decidir se deve
-    // executar a query selecionando todas as dividas da tabela ou somente a
-    // divida de código especificado
+    // executar a query selecionando todas as despesa da tabela ou somente a
+    // despesa de código especificado
     if (email.isEmpty()) {
       query.prepare(QStringLiteral("SELECT * FROM despesa"));
     } else {
       query.prepare(QStringLiteral(
-          "SELECT * FROM divida WHERE email = ?"));
+          "SELECT * FROM despesa WHERE email = ?"));
       query.addBindValue(email);
     }
 
     query.exec();
 
-    // Declara um vector que conterá os ponteiros de cada divida retornada
+    // Declara um vector que conterá os ponteiros de cada despesa retornada
     // pela query
     std::unique_ptr<std::vector<std::unique_ptr<Despesa>>> list(
         new std::vector<std::unique_ptr<Despesa>>());
@@ -127,8 +112,8 @@ DespesaDAO::usuarios(const QString &email) const{
       despesa->setFrequencia(query.value(5).toString());
       despesa->setQuantia(query.value(6).toInt());
 
-      // Move o unique_ptr<Divida> para a lista de tal forma que ele pertença
-      // à lista e não ao escopo atual. Dessa forma 'divida' não será deletado
+      // Move o unique_ptr<despesa> para a lista de tal forma que ele pertença
+      // à lista e não ao escopo atual. Dessa forma 'despesa' não será deletado
       // ao sair deste 'while'
       list->push_back(std::move(despesa));
     }

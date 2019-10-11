@@ -24,8 +24,8 @@ Rectangle {
         ScrollView {
             id: scroll_bar
             width:  320
-            height: ((parent.height - title.height - button_row.height) < 420) ?
-                        parent.height - title.height - button_row.height : 420
+            height: ((parent.height - title.height - button_column.height) < 420) ?
+                        parent.height - title.height - button_column.height : 420
             clip: true
             anchors.top: title.bottom
 
@@ -230,24 +230,35 @@ Rectangle {
                 }
             }
         }
-        Row {
-            id: button_row
+        Column{
+            id: button_column
             width: 320
             height: 80
             spacing: 10
             anchors.top: scroll_bar.bottom
             anchors.horizontalCenter: parent.horizontalCenter
-            Button {
-                y:10
-                width: 150
-                text: "Confirmar"
-                onClicked: confirm()
+            Row {
+                id: button_row
+                spacing: 10
+                Button {
+                    y:10
+                    width: 150
+                    text: "Confirmar"
+                    onClicked: confirm()
+                }
+                Button {
+                    y:10
+                    width: 150
+                    text: "Cancelar"
+                    onClicked: cancel()
+                }
             }
-            Button {
-                y:10
-                width: 150
-                text: "Cancelar"
-                onClicked: cancel()
+            Text {
+                id: alert_message
+                anchors.horizontalCenter: parent.horizontalCenter
+                visible: false
+                color:'red'
+                text: qsTr("Preencha os campos obrigatórios")
             }
         }
         Rectangle {
@@ -305,13 +316,17 @@ Rectangle {
         var amount = amount_typed.text
         if (amount === "") amount = "0"
         if (expenseType_gain_radio_button.checked) amount *= -1
-        var x = manejarDespesa.inserirDespesa(email, description, date, currency,
-                                      category, frequency, amount)
-        console.log(x)
-        clearInputs()
-        var quantidade = manejarDespesa.quantidadeDespesasUsuario(email)
-        console.log(quantidade)
-        stack.pop()
+        if (description !== "") {
+            var x = manejarDespesa.inserirDespesa(email, description, date, currency,
+                                          category, frequency, amount)
+            console.log(x)
+            clearInputs()
+            var quantidade = manejarDespesa.quantidadeDespesasUsuario(email)
+            console.log(quantidade)
+            stack.pop()
+        }
+        else
+            alert_message.visible = true
     }
 
     function cancel() {
