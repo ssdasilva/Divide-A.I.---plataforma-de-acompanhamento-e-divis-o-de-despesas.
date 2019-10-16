@@ -19,7 +19,7 @@ public:
     //remoção foi bem sucedida (ou seja, se a dívida existe), e false se
     //a remoção não foi bem sucedida
 
-    Q_INVOKABLE qint8 quantidadeDespesasUsuario(QString email);
+    Q_INVOKABLE int quantidadeDespesasUsuario(QString email);
     //Retorna a quantidade de despesas daquele usuário
 };
 

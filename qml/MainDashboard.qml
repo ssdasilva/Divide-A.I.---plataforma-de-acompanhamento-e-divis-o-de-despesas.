@@ -419,10 +419,7 @@ Rectangle {
             width: scroll_bar.width
             anchors.top: parent.top
             visible: false
-
-            Text {
-                text: "To be created"
-            }
+            ExpenseDisplay {id: expenseDisplay}
         }
 
     }
@@ -469,7 +466,7 @@ Rectangle {
 
         case 3:
             hideAllContents()
-            despesasContent.visible = true;
+            showDespesasContent()
             break;
 
         default:
@@ -482,6 +479,11 @@ Rectangle {
         expensesContent.visible = false;
         perfilUsuarioContent.visible = false;
         despesasContent.visible = false;
+    }
+
+    function showDespesasContent(){
+        despesasContent.visible = true;
+        expenseDisplay.createObjects()
     }
 }
 

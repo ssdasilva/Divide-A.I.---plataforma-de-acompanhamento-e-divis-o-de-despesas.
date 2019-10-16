@@ -63,7 +63,7 @@ int DespesaDAO::despesaCount() const{
     return 0;
 }
 
-qint8 DespesaDAO::despesaCountUsuario(const QString &email) const{
+int DespesaDAO::despesaCountUsuario(const QString &email) const{
     QSqlQuery query;
 
     query.prepare(QStringLiteral(

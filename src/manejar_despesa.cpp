@@ -34,9 +34,9 @@ bool Manejar_despesa::inserirDespesa(QString email, QString descricao,
     return false;
 }*/
 
-qint8 Manejar_despesa::quantidadeDespesasUsuario(QString email){
+int Manejar_despesa::quantidadeDespesasUsuario(QString email){
     DespesaDAO *despesaDAO = DatabaseManager::instance().despesaDAO();
-    qint8 quantidade = despesaDAO->despesaCountUsuario(email);
+    int quantidade = despesaDAO->despesaCountUsuario(email);
     qDebug() << quantidade;
     return quantidade;
 };
