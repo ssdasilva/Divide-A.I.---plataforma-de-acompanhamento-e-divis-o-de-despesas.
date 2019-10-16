@@ -25,35 +25,70 @@ Rectangle {
             id: headerRow
             width: parent.width
             height: 50
+            property int numberOfButtons: 4
 
             Button {
                 id: groupButton
-                width: parent.width/3
+                width: parent.width/headerRow.numberOfButtons
                 height: parent.height
                 text: qsTr("Grupos")
                 font.bold: true
                 font.pointSize: 15
                 onClicked: setflag(1)
+                Keys.onPressed: {
+                    if (event.key === Qt.Key_Enter ||
+                        event.key === Qt.Key_Return) {
+                        setflag(1)
+                    }
+                }
             }
 
             Button {
                 id: expensesButton
-                width: parent.width/3
+                width: parent.width/headerRow.numberOfButtons
                 height: parent.height
                 text: qsTr("Dívidas")
                 font.bold: true
                 font.pointSize: 15
                 onClicked: setflag(0)
+                Keys.onPressed: {
+                    if (event.key === Qt.Key_Enter ||
+                        event.key === Qt.Key_Return) {
+                        setflag(0)
+                    }
+                }
+            }
+
+            Button {
+                id: despesasButton
+                width: parent.width/headerRow.numberOfButtons
+                height: parent.height
+                text: qsTr("Despesas")
+                font.bold: true
+                font.pointSize: 15
+                onClicked: setflag(3)
+                Keys.onPressed: {
+                    if (event.key === Qt.Key_Enter ||
+                        event.key === Qt.Key_Return) {
+                        setflag(3)
+                    }
+                }
             }
 
             Button {
                 id: perfilUsuarioButton
-                width: parent.width/3
+                width: parent.width/headerRow.numberOfButtons
                 height: parent.height
                 text: qsTr("Perfil")
                 font.bold: true
                 font.pointSize: 15
                 onClicked: setflag(2)
+                Keys.onPressed: {
+                    if (event.key === Qt.Key_Enter ||
+                        event.key === Qt.Key_Return) {
+                        setflag(2)
+                    }
+                }
             }
         }
 
@@ -377,6 +412,19 @@ Rectangle {
             }
         }
 
+        Column{
+            id: despesasContent
+            y: 0
+            height: scroll_bar.height
+            width: scroll_bar.width
+            anchors.top: parent.top
+            visible: false
+
+            Text {
+                text: "To be created"
+            }
+        }
+
     }
 
     Rectangle {
@@ -402,28 +450,26 @@ Rectangle {
         }
     }
 
-
-
-
-
     function setflag(mudaFlag) {
         switch(mudaFlag){
         case 0:
-            groupContent.visible = false;
+            hideAllContents()
             expensesContent.visible = true;
-            perfilUsuarioContent.visible = false;
             break;
 
         case 1:
+            hideAllContents()
             groupContent.visible = true;
-            expensesContent.visible = false;
-            perfilUsuarioContent.visible = false;
             break;
 
         case 2:
-            groupContent.visible = false;
-            expensesContent.visible = false;
+            hideAllContents()
             perfilUsuarioContent.visible = true;
+            break;
+
+        case 3:
+            hideAllContents()
+            despesasContent.visible = true;
             break;
 
         default:
@@ -431,8 +477,13 @@ Rectangle {
         }
     }
 
+    function hideAllContents(){
+        groupContent.visible = false;
+        expensesContent.visible = false;
+        perfilUsuarioContent.visible = false;
+        despesasContent.visible = false;
+    }
 }
-
 
 /*##^##
 Designer {
