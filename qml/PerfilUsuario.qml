@@ -3,6 +3,7 @@ import QtQuick.Controls 2.12
 import QtQuick.Layouts 1.12
 
 Rectangle{
+    id: perfilUsuarioRoot
     width: parent.width
     height: parent.height
 
@@ -46,7 +47,7 @@ Rectangle{
 
             background: Rectangle{
                 anchors.fill: parent
-                border.color: parent.corTextField
+                border.color: perfilUsuarioRoot.corTextField
                 border.width: 2
             }
         }
@@ -72,7 +73,7 @@ Rectangle{
 
             background: Rectangle{
                 anchors.fill: parent
-                border.color: parent.corTextField
+                border.color: perfilUsuarioRoot.corTextField
                 border.width: 2
             }
         }
@@ -98,7 +99,7 @@ Rectangle{
 
             background: Rectangle{
                 anchors.fill: parent
-                border.color: parent.corTextField
+                border.color: perfilUsuarioRoot.corTextField
                 border.width: 2
             }
         }
@@ -123,7 +124,7 @@ Rectangle{
 
             background: Rectangle{
                 anchors.fill: parent
-                border.color: parent.corTextField
+                border.color: perfilUsuarioRoot.corTextField
                 border.width: 2
             }
         }
@@ -149,7 +150,7 @@ Rectangle{
 
             background: Rectangle{
                 anchors.fill: parent
-                border.color: parent.corTextField
+                border.color: perfilUsuarioRoot.corTextField
                 border.width: 2
             }
         }

@@ -140,11 +140,10 @@ Rectangle {
             } else {
                 var isPasswordCorrect = cadastrarUsuario.senhaCorreta(email, senha)
                 if (isPasswordCorrect) {
-                    console.log(email)
                     secaoUsuario.setEmailLogado(email)
                     salvar_usuario.save(email,senha)
                     perfilUsuario.init()
-                    stack.push(mainDashboard_View)
+                    showDashboardView()
                 } else {
                     hideEmailAlert()
                     showPasswordAlert("E-mail ou senha incorretos!")
@@ -185,14 +184,16 @@ Rectangle {
         hidePasswordAlert()
     }
 
+    function showDashboardView(){
+        stack.push(mainDashboard_View)
+    }
+
     function checkSettings(){
         if (cadastrarUsuario.senhaCorreta(salvar_usuario.loadEmail(),
                                           salvar_usuario.loadPassword())) {
-            console.log("Há e-mail e senha válidos no arquivo de configuração")
-            console.log(salvar_usuario.loadEmail())
             secaoUsuario.setEmailLogado(salvar_usuario.loadEmail())
             perfilUsuario.init()
-            stack.push(mainDashboard_View)
+            showDashboardView()
         }
     }
 }

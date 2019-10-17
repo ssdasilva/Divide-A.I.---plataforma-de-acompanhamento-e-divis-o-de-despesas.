@@ -319,11 +319,8 @@ Rectangle {
         if (description !== "") {
             var x = manejarDespesa.inserirDespesa(email, description, date, currency,
                                           category, frequency, amount)
-            console.log(x)
             clearInputs()
-            var quantidade = manejarDespesa.quantidadeDespesasUsuario(email)
-            console.log(quantidade)
-            stack.pop()
+            returnToDashboard()
         }
         else
             alert_message.visible = true
@@ -331,6 +328,10 @@ Rectangle {
 
     function cancel() {
         clearInputs()
+        returnToDashboard()
+    }
+
+    function returnToDashboard(){
         stack.pop()
     }
 

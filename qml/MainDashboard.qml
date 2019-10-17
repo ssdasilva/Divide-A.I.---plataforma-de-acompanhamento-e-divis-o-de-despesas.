@@ -7,7 +7,6 @@ Rectangle {
     width: parent.width
     height: parent.height
 
-
     Column {
         id: groupColumn
         y: 0
@@ -101,17 +100,15 @@ Rectangle {
         width: parent.width
         height: parent.height - 160
         anchors.top: groupColumn.bottom
-        anchors.left: parent.left
-        anchors.right: parent.right
+        anchors.horizontalCenter: parent.horizontalCenter
+        clip: true
+        contentHeight: groupContent.height
         ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
-        ScrollBar.vertical.policy: ScrollBar.AlwaysOn
-
 
         Column {
             id: groupContent
-            y: 0
-            height: scroll_bar.height
             width: scroll_bar.width
+            height: 400
             anchors.top: parent.top
 
             Row {
@@ -411,9 +408,8 @@ Rectangle {
         Column{
             id: despesasContent
             y: 0
-            height: scroll_bar.height
-            width: scroll_bar.width
-            anchors.fill: parent
+            width: parent.width
+            anchors.top: parent.top
             visible: false
             ExpenseDisplay {id: expenseDisplay}
         }
@@ -439,7 +435,10 @@ Rectangle {
 
         MouseArea {
             anchors.fill: parent
-            onClicked: {stack.push(newExpense_View)}
+            onClicked: {
+                unloadComponents()
+                stack.push(newExpense_View)
+            }
         }
     }
 
@@ -448,16 +447,19 @@ Rectangle {
         case 0:
             hideAllContents()
             expensesContent.visible = true;
+            scroll_bar.contentHeight = expensesContent.height
             break;
 
         case 1:
             hideAllContents()
             groupContent.visible = true;
+            scroll_bar.contentHeight = groupContent.height
             break;
 
         case 2:
             hideAllContents()
             perfilUsuarioContent.visible = true;
+            scroll_bar.contentHeight = perfilUsuarioContent.height
             break;
 
         case 3:
@@ -472,7 +474,6 @@ Rectangle {
 
     function hideAllContents(){
         groupContent.visible = false;
-        expenseDisplay.deleteObjects()
         expensesContent.visible = false;
         perfilUsuarioContent.visible = false;
         despesasContent.visible = false;
@@ -480,7 +481,13 @@ Rectangle {
 
     function showDespesasContent(){
         despesasContent.visible = true;
-        expenseDisplay.createObjects()
+        expenseDisplay.createObjects();
+        despesasContent.height = expenseDisplay.height
+        scroll_bar.contentHeight = expenseDisplay.height
+    }
+
+    function unloadComponents(){
+        expenseDisplay.deleteObjects()
     }
 }
 
