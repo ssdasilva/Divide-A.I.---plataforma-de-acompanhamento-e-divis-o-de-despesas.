@@ -102,7 +102,7 @@ Rectangle {
         height: parent.height - 160
         anchors.top: groupColumn.bottom
         anchors.left: parent.left
-        anchors.right: parent.height
+        anchors.right: parent.right
         ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
         ScrollBar.vertical.policy: ScrollBar.AlwaysOn
 
@@ -133,7 +133,6 @@ Rectangle {
                     id: group1_info
                     width: parent.width - group1_image.width
                     height: parent.height
-                    anchors.left: group1_image.right
 
                     Text {
                         id: group1_name
@@ -224,7 +223,7 @@ Rectangle {
                 id: group3
                 width: parent.width
                 height: 100
-                anchors.centerIn: parent.Center
+                anchors.horizontalCenter: parent.horizontalCenter
 
                 Image {
                     id: group3_image
@@ -239,7 +238,6 @@ Rectangle {
                     id: group3_info
                     width: parent.width - group3_image.width
                     height: parent.height
-                    anchors.left: group3_image.right
 
                     Text {
                         id: group3_name
@@ -279,7 +277,7 @@ Rectangle {
                 id: group4
                 width: parent.width
                 height: 100
-                anchors.centerIn: parent.Center
+                anchors.horizontalCenter: parent.horizontalCenter
 
                 Image {
                     id: group4_image
@@ -294,7 +292,6 @@ Rectangle {
                     id: group4_info
                     width: parent.width - group4_image.width
                     height: parent.height
-                    anchors.left: group4_image.right
 
                     Text {
                         id: group4_name
@@ -346,7 +343,7 @@ Rectangle {
                 id: egroup1
                 height: 100
                 width: parent.width
-                anchors.centerIn: parent.Center
+                anchors.horizontalCenter: parent.horizontalCenter
 
                 Image {
                     id: egroup1_image
@@ -361,7 +358,6 @@ Rectangle {
                     id: egroup1_info
                     width: parent.width - egroup1_image.width
                     height: parent.height
-                    anchors.left: egroup1_image.right
 
                     Text {
                         id: egroup1_name
@@ -417,7 +413,7 @@ Rectangle {
             y: 0
             height: scroll_bar.height
             width: scroll_bar.width
-            anchors.top: parent.top
+            anchors.fill: parent
             visible: false
             ExpenseDisplay {id: expenseDisplay}
         }
@@ -476,6 +472,7 @@ Rectangle {
 
     function hideAllContents(){
         groupContent.visible = false;
+        expenseDisplay.deleteObjects()
         expensesContent.visible = false;
         perfilUsuarioContent.visible = false;
         despesasContent.visible = false;

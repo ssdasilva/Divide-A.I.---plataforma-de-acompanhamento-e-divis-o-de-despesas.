@@ -21,6 +21,15 @@ public:
 
     Q_INVOKABLE int quantidadeDespesasUsuario(QString email);
     //Retorna a quantidade de despesas daquele usuário
+
+    Q_INVOKABLE QString getDescricaoDespesaUsuario(QString email, unsigned long order);
+
+    Q_INVOKABLE QString getCategoriaDespesaUsuario(QString email, unsigned long order);
+
+    Q_INVOKABLE QString getMoedaDespesaUsuario(QString email, unsigned long order);
+
+    Q_INVOKABLE int getQuantiaDespesaUsuario(QString email, unsigned long order);
+
 };
 
 #endif // MANEJAR_DESPESA_H

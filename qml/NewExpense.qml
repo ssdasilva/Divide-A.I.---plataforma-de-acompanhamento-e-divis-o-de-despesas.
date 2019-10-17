@@ -124,7 +124,7 @@ Rectangle {
                         ComboBox {
                             id: currency_combo_box
                             anchors.fill: parent
-                            model: ["Reais (R$)", "Dólar (US$)"]
+                            model: ["R$", "US$"]
                         }
                     }
                 }

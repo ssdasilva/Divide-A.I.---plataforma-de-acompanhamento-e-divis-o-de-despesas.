@@ -37,6 +37,42 @@ bool Manejar_despesa::inserirDespesa(QString email, QString descricao,
 int Manejar_despesa::quantidadeDespesasUsuario(QString email){
     DespesaDAO *despesaDAO = DatabaseManager::instance().despesaDAO();
     int quantidade = despesaDAO->despesaCountUsuario(email);
-    qDebug() << quantidade;
     return quantidade;
+}
+
+QString Manejar_despesa::getDescricaoDespesaUsuario(QString email, unsigned long order){
+    DespesaDAO *despesaDAO = DatabaseManager::instance().despesaDAO();
+
+    std::unique_ptr<std::vector<std::unique_ptr<Despesa>>> list;
+    list = despesaDAO->usuarios(email);
+
+    return list->at(order)->getDescricao();
+
+}
+
+QString Manejar_despesa::getCategoriaDespesaUsuario(QString email, unsigned long order){
+    DespesaDAO *despesaDAO = DatabaseManager::instance().despesaDAO();
+
+    std::unique_ptr<std::vector<std::unique_ptr<Despesa>>> list;
+    list = despesaDAO->usuarios(email);
+
+    return list->at(order)->getCategoria();
+}
+
+QString Manejar_despesa::getMoedaDespesaUsuario(QString email, unsigned long order){
+    DespesaDAO *despesaDAO = DatabaseManager::instance().despesaDAO();
+
+    std::unique_ptr<std::vector<std::unique_ptr<Despesa>>> list;
+    list = despesaDAO->usuarios(email);
+
+    return list->at(order)->getMoeda();
+}
+
+int Manejar_despesa::getQuantiaDespesaUsuario(QString email, unsigned long order){
+    DespesaDAO *despesaDAO = DatabaseManager::instance().despesaDAO();
+
+    std::unique_ptr<std::vector<std::unique_ptr<Despesa>>> list;
+    list = despesaDAO->usuarios(email);
+
+    return list->at(order)->getQuantia();
 };
