@@ -25,6 +25,9 @@ public:
 
   Q_INVOKABLE float saldo() const;
 
+  Q_INVOKABLE bool simplificar() const;
+  Q_INVOKABLE void setSimplificar(bool simplificar);
+
 private slots:
   void setSaldo();
 
@@ -38,6 +41,7 @@ private:
   QString m_nome;
   QString m_sobrenome;
   float m_saldo;
+  bool m_simplificar;
 
   // Utilizado para verificar o saldo do usuário
   QTimer m_timer;

@@ -10,7 +10,7 @@ public:
 
   Q_INVOKABLE bool inserirUsuario(QString email, QString senha, QString idade,
                                   QString nome, QString sobrenome,
-                                  QString saldo); // retorna true se foi
+                                  QString saldo, bool simplificar); // retorna true se foi
                                                   // possível inserir o usuário
                                                   // e false e não foi possível
 

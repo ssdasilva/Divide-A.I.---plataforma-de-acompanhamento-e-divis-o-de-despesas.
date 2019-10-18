@@ -27,3 +27,8 @@ void Usuario::setSobrenome(const QString &sobrenome) {
 float Usuario::saldo() const { return m_saldo; }
 
 void Usuario::setSaldo(float saldo) { m_saldo = saldo; }
+
+bool Usuario::simplificar() const { return m_simplificar; }
+
+void  Usuario::setSimplificar(bool simplificar){m_simplificar = simplificar;}
+

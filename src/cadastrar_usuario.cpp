@@ -2,6 +2,7 @@
 #include "usuario.h"
 #include "usuario_dao.h"
 #include "database_manager.h"
+#include "QDebug"
 
 CadastrarUsuario::CadastrarUsuario(QObject *parent) : QObject(parent) {}
 
@@ -16,7 +17,8 @@ bool CadastrarUsuario::usuarioExiste(QString email) {
 
 bool CadastrarUsuario::inserirUsuario(QString email, QString senha,
                                       QString idade, QString nome,
-                                      QString sobrenome, QString saldo) {
+                                      QString sobrenome, QString saldo,
+                                      bool simplificar) {
   Usuario usuario;
 
   UsuarioDAO *usuarioDAO = DatabaseManager::instance().usuarioDAO();
@@ -27,6 +29,8 @@ bool CadastrarUsuario::inserirUsuario(QString email, QString senha,
   usuario.setNome(nome);
   usuario.setSobrenome(sobrenome);
   usuario.setSaldo(saldo.toFloat());
+  usuario.setSimplificar(simplificar);
+
 
   bool inseriu = usuarioDAO->insertUsuario(usuario);
 

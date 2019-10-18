@@ -160,7 +160,7 @@ Rectangle{
         id: alert_message
         anchors.top: imagem.top
         anchors.horizontalCenter: imagem.horizontalCenter
-        color: change_preference.state? "#AA0000":"#00AA00"
+        color: change_preference.state? "#00AA00":"#AA0000"
         opacity: 1
         height: 20
         width: 300
@@ -169,8 +169,9 @@ Rectangle{
         Text{
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.verticalCenter: parent.verticalCenter
-            text: change_preference.state? "Recurso de simplificação de conta desativado":
-                                           "Recurso de simplificação de conta ativado"
+            text: change_preference.state? "Recurso de simplificação de dívidas ativado":
+                                           "Recurso de simplificação de dívidas desativado"
+
             font.bold: true
             color: "white"
         }
@@ -191,17 +192,17 @@ Rectangle{
 
         Botao{
             id: change_preference
-            property int state: 1
+            property bool state: perfilUsuario.simplificar()
             anchors.bottomMargin: 5
             textoBotao:"<b> Simplificar </b>"
-            corBotao: change_preference.state? "#AA0000":"#00AA00"
+            corBotao: change_preference.state? "#00AA00":"#AA0000"
             width: 120
             onClicouBotao: {
                 alert_message.visible = true
                 animation_alert.running = true
-                change_preference.state = change_preference.state? 0:1
+                change_preference.state = change_preference.state? false:true
+                perfilUsuario.setSimplificar(change_preference.state)
             }
-
         }
 
         Botao{

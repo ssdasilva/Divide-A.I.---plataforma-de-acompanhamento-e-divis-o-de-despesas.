@@ -4,14 +4,16 @@
 #include <QSqlQuery>
 #include <QVariant>
 
+#include "QDebug"
+
 bool UsuarioDAO::insertUsuario(const Usuario &usuario) const {
   QSqlQuery query;
 
   // Monta a query com o uso de REPLACE de tal forma que o usuário será
   // inserido se não existir, caso contrário, será atualizado
   query.prepare(QStringLiteral(
-      "INSERT INTO usuario (email, senha, idade, nome, sobrenome, saldo) "
-      "VALUES (?, ?, ?, ?, ?, ?)"));
+      "INSERT INTO usuario (email, senha, idade, nome, sobrenome, saldo, simplificar) "
+      "VALUES (?, ?, ?, ?, ?, ?, ?)"));
 
   query.addBindValue(usuario.email());
   query.addBindValue(usuario.senha());
@@ -19,6 +21,7 @@ bool UsuarioDAO::insertUsuario(const Usuario &usuario) const {
   query.addBindValue(usuario.nome());
   query.addBindValue(usuario.sobrenome());
   query.addBindValue(usuario.saldo());
+  query.addBindValue(usuario.simplificar());
 
   return query.exec();
 }
@@ -84,6 +87,7 @@ UsuarioDAO::usuarios(const QString &email) const {
     usuario->setSobrenome(query.value(3).toString());
     usuario->setIdade(query.value(4).toInt());
     usuario->setSaldo(query.value(5).toFloat());
+    usuario->setSimplificar(query.value(6).toBool());
 
     // Move o unique_ptr<Usuario> para a lista de tal forma que ele pertença
     // à lista e não ao escopo atual. Dessa forma 'usuario' não será deletado
@@ -149,6 +153,16 @@ bool UsuarioDAO::atualizarSaldo(const QString &email, float saldo) const {
   return query.exec();
 }
 
+bool UsuarioDAO::atualizarSimplificar(const QString &email, bool simplificar) const {
+  QSqlQuery query;
+
+  query.prepare(QStringLiteral("UPDATE usuario SET simplificar = ? WHERE email = ?"));
+  query.addBindValue(simplificar);
+  query.addBindValue(email);
+
+  return query.exec();
+}
+
 float UsuarioDAO::getSaldo(const QString &email) const {
   QSqlQuery query;
 
@@ -156,4 +170,14 @@ float UsuarioDAO::getSaldo(const QString &email) const {
   query.addBindValue(email);
 
   return query.exec();
+}
+
+bool UsuarioDAO::getSimplificar(const QString &email) const
+{
+    QSqlQuery query;
+
+    query.prepare(QStringLiteral("SELECT simplificar FROM usuario WHERE email = ?"));
+    query.addBindValue(email);
+
+    return query.exec();
 }

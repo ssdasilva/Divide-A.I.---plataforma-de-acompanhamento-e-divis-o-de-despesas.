@@ -33,7 +33,11 @@ public:
 
   bool atualizarSaldo(const QString &email, float saldo) const;
 
+  bool atualizarSimplificar(const QString &email, bool simplificacao) const;
+
   float getSaldo(const QString &email) const;
+
+  bool getSimplificar(const QString &email) const;
 };
 
 #endif // USUARIO_DAO_H

@@ -127,12 +127,11 @@ Rectangle{
             Row{
                 id: check_row
                 CheckBox {
+                    id: check_box
                     height: 70
                     width: 300
-                    id: check_box
-                    anchors.horizontalCenter: scroll_bar.horizontalCenter
                     spacing: 20
-                    text: qsTr("Simplificar minhas contas!")
+                    text: qsTr("Simplificar minhas dívidas!")
                     font.bold: true
                 }
             }
@@ -179,7 +178,7 @@ Rectangle{
         else {
             // por padrão, ao inserir um usuário novo, seu saldo será zero
             cadastrarUsuario.inserirUsuario(email_typed.text, password_typed.text, age_typed.text,
-                                                name_typed.text, surname_typed.text, "0");
+                                                name_typed.text, surname_typed.text, "0",check_box.checked);
             stack.pop()
         }
     }

@@ -27,6 +27,9 @@ public:
   float saldo() const;
   void setSaldo(float saldo);
 
+  bool simplificar() const;
+  void setSimplificar(bool simplificar);
+
 private:
   QString m_email;
 
@@ -39,6 +42,8 @@ private:
   QString m_sobrenome;
 
   float m_saldo;
+
+  bool m_simplificar;
 };
 
 #endif // USUARIO_H

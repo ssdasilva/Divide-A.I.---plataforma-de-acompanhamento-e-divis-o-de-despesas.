@@ -5,6 +5,7 @@ CREATE TABLE Usuario (
     Sobrenome VARCHAR(50),
 	Idade INT,
     Saldo FLOAT,
+    Simplificar BOOLEAN,
     PRIMARY KEY (Email)
     );
 

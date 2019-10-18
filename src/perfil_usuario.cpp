@@ -26,6 +26,8 @@ void PerfilUsuario::init() {
     m_nome = list->at(0)->nome();
     m_sobrenome = list->at(0)->sobrenome();
     m_saldo = list->at(0)->saldo();
+    m_simplificar =  list->at(0)->simplificar();
+
   } else
     qDebug() << "Erro no perfil usuário --> não achou usuário";
 
@@ -75,4 +77,13 @@ void PerfilUsuario::setSaldo() {
   m_saldo = usuarioDAO->getSaldo(m_email);
 
   emit mudouSaldo(m_saldo);
+}
+
+bool PerfilUsuario::simplificar() const { return m_simplificar; }
+
+void PerfilUsuario::setSimplificar(bool simplificar) {
+    m_simplificar = simplificar;
+    UsuarioDAO *usuarioDAO = DatabaseManager::instance().usuarioDAO();
+
+    usuarioDAO->atualizarSimplificar(m_email,m_simplificar);
 }
