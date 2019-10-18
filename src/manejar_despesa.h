@@ -26,6 +26,10 @@ public:
 
     Q_INVOKABLE QString getCategoriaDespesaUsuario(QString email, unsigned long order);
 
+    Q_INVOKABLE QString getDataDespesaUsuario(QString email, unsigned long order);
+
+    Q_INVOKABLE QString getFrequenciaDespesaUsuario(QString email, unsigned long order);
+
     Q_INVOKABLE int getQuantiaDespesaUsuario(QString email, unsigned long order);
 
 };

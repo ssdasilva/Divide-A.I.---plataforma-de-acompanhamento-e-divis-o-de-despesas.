@@ -34,6 +34,10 @@ Item {
                     expenses[i].setDescription(description)
                     var category = manejarDespesa.getCategoriaDespesaUsuario(emailLogado, i)
                     expenses[i].setCategory(category)
+                    var date = manejarDespesa.getDataDespesaUsuario(emailLogado, i)
+                    expenses[i].setDate(date)
+                    var frequency = manejarDespesa.getFrequenciaDespesaUsuario(emailLogado, i)
+                    expenses[i].setFrequency(frequency)
                     var amount = manejarDespesa.getQuantiaDespesaUsuario(emailLogado, i)
                     expenses[i].setAmount(amount)
                 }

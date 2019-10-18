@@ -5,38 +5,74 @@ Item {
     width: parent.width
 
     property int position
+    property string frequency: ""
+    property int amount: 0
     signal requestDeletion(int position, string descriptionText)
 
     Column{
         spacing: 10
-        anchors.fill: parent
+        height: parent.height
+        width: parent.width < 250? parent.width : 250
+        anchors.centerIn: parent
         anchors.margins: 10
 
-        Row{
-            spacing: 10
-            anchors.horizontalCenter: parent.horizontalCenter
+        Rectangle{
+            anchors.left: parent.left
+            height: childrenRect.height
+            width: parent.width
             Text {
                 id: description
+                anchors.left: parent.left
                 font.pixelSize: 15
             }
             Text {
                 id: category
+                anchors.left: description.right
+                anchors.leftMargin: 10
                 font.pixelSize: 12
                 color: "#cfa556"
                 font.bold: true
             }
+            Text {
+                id: dateText
+                anchors.right: parent.right
+                font.pixelSize: 12
+                text: "04/05/2019"
+            }
         }
         Row{
             spacing: 5
-            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.left: parent.left
             Text {
-                id: currency
+                id: amountText
                 font.pixelSize: 12
-                text: qsTr("R$")
+                font.bold: true
+                text: {
+                    if (amount > 0)
+                        return "Despesa de R$"+amount
+                    else
+                        return "Entrada de R$"+(amount*-1)
+                }
+                color: {
+                    if (amount > 0)
+                        return "#eb0808"
+                    else
+                        return "#2e7610"
+                }
             }
+        }
+        Row {
+            spacing: 5
+            anchors.left: parent.left
             Text {
-                id: amount
+                id: frequencyText
                 font.pixelSize: 12
+                text: {
+                    if (frequency === "")
+                        return "Gasto único"
+                    else
+                        return "Frequência: "+frequency
+                }
             }
         }
     }
@@ -61,7 +97,9 @@ Item {
     function setHeight(value) {expense.height = value}
     function setY(value) {expense.y = value}
     function setDescription(text) {description.text = text}
+    function setDate(text) {dateText.text = text}
     function setCategory(text) {category.text = text}
-    function setAmount(text) {amount.text = text}
+    function setFrequency(text) {frequency = text}
+    function setAmount(text) {amount = text}
     function destroy() {expense.destroy()}
 }
