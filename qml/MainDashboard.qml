@@ -104,6 +104,7 @@ Rectangle {
         clip: true
         contentHeight: groupContent.height
         ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
+        onHeightChanged: expenseDisplay.contentHeight = height
 
         Column {
             id: groupContent
@@ -411,7 +412,10 @@ Rectangle {
             width: parent.width
             anchors.top: parent.top
             visible: false
-            ExpenseDisplay {id: expenseDisplay}
+            ExpenseDisplay {
+                id: expenseDisplay
+                contentY: scroll_bar.y
+            }
         }
 
     }
@@ -424,6 +428,9 @@ Rectangle {
         anchors.bottom: parent.bottom
         anchors.right: parent.right
         anchors.margins: 20
+        border.color: "white"
+        border.width: 2
+
         color: "#0f9ad3"
 
         Text {

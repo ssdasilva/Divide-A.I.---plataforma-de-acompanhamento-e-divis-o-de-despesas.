@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import QtQuick.Controls 2.12
 //import "../js/componentCreation.js" as ComponentCreationScript
 
 Item {
@@ -9,6 +10,8 @@ Item {
     property var expenses: []
     property int numberOfExpenses: 0
     property bool hasLoadedObjects: false
+    property int contentY
+    property int contentHeight
 
     function createObjects(){
         if (!hasLoadedObjects){
@@ -32,10 +35,30 @@ Item {
                     var amount = manejarDespesa.getQuantiaDespesaUsuario(emailLogado, i)
                     expenses[i].setAmount(amount)
                 }
+                expenses[i].onRequestDeletion.connect(showDialog)
             }
             numberOfExpenses = quantidade
             hasLoadedObjects = true
         }
+    }
+
+    function showDialog(descriptionText){
+        confirmDeletionDialog.descriptionText = descriptionText
+        confirmDeletionDialog.open()
+    }
+
+    Dialog {
+        id: confirmDeletionDialog
+        x: (parent.width - width) / 2
+        y: (contentHeight - height) / 2 + contentY / 2
+        modal: true
+
+        standardButtons: Dialog.Yes | Dialog.No
+        property string descriptionText
+        title: "Você deseja realmente deletar<br/>"+descriptionText+"?"
+        onAccepted: console.log("Aceitou o botão ", descriptionText)
+        onRejected: console.log("Rejeitou o botão ", descriptionText)
+
     }
 
     function deleteObjects(){

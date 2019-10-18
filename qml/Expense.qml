@@ -4,6 +4,8 @@ Item {
     id: expense
     width: parent.width
 
+    signal requestDeletion(string descriptionText)
+
     Column{
         spacing: 10
         anchors.fill: parent
@@ -38,10 +40,30 @@ Item {
         }
     }
 
+    Botao {
+        id: deleteExpense
+        anchors.top: parent.top
+        anchors.right: parent.right
+        anchors.topMargin: 10
+        anchors.rightMargin: 20
+        height: 30
+        width: 80
+        lbFonte: 10
+
+        textoBotao: qsTr("Deletar")
+
+        onClicouBotao: {
+            requestDeletion(description.text)
+        }
+    }
+
     function setHeight(value) {expense.height = value}
     function setY(value) {expense.y = value}
     function setDescription(text) {description.text = text}
     function setCategory(text) {category.text = text}
     function setAmount(text) {amount.text = text}
     function destroy() {expense.destroy()}
+    function removeFromDB(){
+        console.log("Clicou no botão: ", description.text)
+    }
 }
