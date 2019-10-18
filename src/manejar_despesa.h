@@ -14,7 +14,7 @@ public:
     //Permite a inserção de uma nova dívida para o usuário do usuário email.
     //Retorna true se a inserção foi bem sucedida e false caso contrário
 
-    //Q_INVOKABLE bool removerDespesa(QString email, QString descricao);
+    Q_INVOKABLE bool removerDespesa(QString email, QString descricao);
     //Permite a remoção de uma dívida de um usuário. Retorna true se a
     //remoção foi bem sucedida (ou seja, se a dívida existe), e false se
     //a remoção não foi bem sucedida

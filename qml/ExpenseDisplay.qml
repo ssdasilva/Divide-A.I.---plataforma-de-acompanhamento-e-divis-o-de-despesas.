@@ -13,6 +13,8 @@ Item {
     property int contentY
     property int contentHeight
 
+    signal requestHeightReduction(int expenseHeight)
+
     function createObjects(){
         if (!hasLoadedObjects){
             var emailLogado = secaoUsuario.getEmailLogado()
@@ -35,6 +37,7 @@ Item {
                     var amount = manejarDespesa.getQuantiaDespesaUsuario(emailLogado, i)
                     expenses[i].setAmount(amount)
                 }
+                expenses[i].position = i
                 expenses[i].onRequestDeletion.connect(showDialog)
             }
             numberOfExpenses = quantidade
@@ -42,7 +45,8 @@ Item {
         }
     }
 
-    function showDialog(descriptionText){
+    function showDialog(position, descriptionText){
+        confirmDeletionDialog.position = position
         confirmDeletionDialog.descriptionText = descriptionText
         confirmDeletionDialog.open()
     }
@@ -54,11 +58,25 @@ Item {
         modal: true
 
         standardButtons: Dialog.Yes | Dialog.No
+        property int position
         property string descriptionText
         title: "Você deseja realmente deletar<br/>"+descriptionText+"?"
-        onAccepted: console.log("Aceitou o botão ", descriptionText)
-        onRejected: console.log("Rejeitou o botão ", descriptionText)
+        onAccepted: deleteExpense(position, descriptionText)
 
+    }
+
+    function deleteExpense(position, descriptionText){
+        var emailLogado = secaoUsuario.getEmailLogado()
+        manejarDespesa.removerDespesa(emailLogado, descriptionText)
+        expenses[position].destroy()
+        var i
+        for (i=position; i<numberOfExpenses-1; i++){
+            expenses[i] = expenses[i+1]
+            expenses[i].setY(expenseHeight*i)
+        }
+        numberOfExpenses--
+        height -= expenseHeight
+        requestHeightReduction(expenseHeight)
     }
 
     function deleteObjects(){

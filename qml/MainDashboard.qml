@@ -415,6 +415,7 @@ Rectangle {
             ExpenseDisplay {
                 id: expenseDisplay
                 contentY: scroll_bar.y
+                onRequestHeightReduction: scroll_bar.contentHeight -= expenseHeight
             }
         }
 

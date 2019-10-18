@@ -4,7 +4,8 @@ Item {
     id: expense
     width: parent.width
 
-    signal requestDeletion(string descriptionText)
+    property int position
+    signal requestDeletion(int position, string descriptionText)
 
     Column{
         spacing: 10
@@ -53,7 +54,7 @@ Item {
         textoBotao: qsTr("Deletar")
 
         onClicouBotao: {
-            requestDeletion(description.text)
+            requestDeletion(position, description.text)
         }
     }
 
@@ -63,7 +64,4 @@ Item {
     function setCategory(text) {category.text = text}
     function setAmount(text) {amount.text = text}
     function destroy() {expense.destroy()}
-    function removeFromDB(){
-        console.log("Clicou no botão: ", description.text)
-    }
 }

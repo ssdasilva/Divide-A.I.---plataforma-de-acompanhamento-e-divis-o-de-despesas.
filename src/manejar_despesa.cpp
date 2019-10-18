@@ -28,10 +28,10 @@ bool Manejar_despesa::inserirDespesa(QString email, QString descricao,
    return inseriu;
 }
 
-/*bool Manejar_despesa::removerDespesa(QString email, QString descricao){
-
-    return false;
-}*/
+bool Manejar_despesa::removerDespesa(QString email, QString descricao){
+    DespesaDAO *despesaDAO = DatabaseManager::instance().despesaDAO();
+    return despesaDAO->removeDespesa(email, descricao);
+}
 
 int Manejar_despesa::quantidadeDespesasUsuario(QString email){
     DespesaDAO *despesaDAO = DatabaseManager::instance().despesaDAO();
