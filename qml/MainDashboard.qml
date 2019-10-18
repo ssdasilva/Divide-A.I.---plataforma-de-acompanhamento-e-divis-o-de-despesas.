@@ -422,7 +422,7 @@ Rectangle {
     }
 
     Rectangle {
-        id: newExpenseButton
+        id: newsButton
         width: 50
         height: 50
         radius: 25
@@ -437,14 +437,61 @@ Rectangle {
         Text {
             anchors.centerIn: parent
             font.pixelSize: 20
+            font.bold: true
             text: "<b>+</b>"
             color: "#ffffff"
         }
 
         MouseArea {
             anchors.fill: parent
-            onClicked: {
+            onClicked: changeNewsColumnDisplay()
+            onEntered: newsButton.opacity = 0.8
+            onExited: {
+                if (newsColumn.visible == false)
+                    newsButton.opacity = 1
+            }
+        }
+    }
+
+    function changeNewsColumnDisplay(){
+        if (newsColumn.visible == false){
+            newsColumn.visible = true
+            newsButton.opacity = 0.5
+        }
+        else {
+            newsColumn.visible = false
+            newsButton.opacity = 1
+        }
+    }
+
+    Column {
+        id: newsColumn
+        anchors.right: newsButton.right
+        anchors.bottom: newsButton.top
+        anchors.bottomMargin: 10
+        width: 100
+        spacing: 10
+        visible: false
+        Botao {
+            width: parent.width
+            espessuraBorda: 2
+            textoBotao: qsTr("Nova dívida")
+            lbFonte: 10
+        }
+        Botao {
+            width: parent.width
+            espessuraBorda: 2
+            textoBotao: qsTr("Novo grupo")
+            lbFonte: 10
+        }
+        Botao {
+            width: parent.width
+            espessuraBorda: 2
+            textoBotao: qsTr("Nova despesa")
+            lbFonte: 10
+            onClicouBotao: {
                 unloadComponents()
+                changeNewsColumnDisplay()
                 stack.push(newExpense_View)
             }
         }

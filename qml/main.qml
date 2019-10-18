@@ -27,7 +27,6 @@ Window {
     Component {
         id: mainDashboard_View
         MainDashboard{}
-
     }
     Component {
         id: newExpense_View

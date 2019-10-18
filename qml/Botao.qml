@@ -9,6 +9,8 @@ Item{
     property color corTexto: "white"
     property string textoBotao: "Clique aqui"
     property int lbFonte: 15
+    property int espessuraBorda: 0
+    property color corBorda: "#ffffff"
     width: 200
     height: 40
     signal clicouBotao
@@ -18,6 +20,8 @@ Item{
     Rectangle{
         anchors.fill: parent
         color: root.corBotao
+        border.width: espessuraBorda
+        border.color: corBorda
         radius: 5
         z: 1
 
