@@ -156,16 +156,64 @@ Rectangle{
         }
     }
 
-    Botao{
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: 5
-        anchors.horizontalCenter: parent.horizontalCenter
-        textoBotao: "Logout"
-        onClicouBotao: {
-            salvar_usuario.deleteSettings()
-
-            stack.pop()
+    Rectangle{
+        id: alert_message
+        anchors.top: imagem.top
+        anchors.horizontalCenter: imagem.horizontalCenter
+        color: change_preference.state? "#AA0000":"#00AA00"
+        opacity: 1
+        height: 20
+        width: 300
+        anchors.topMargin: 50
+        visible: false
+        Text{
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.verticalCenter: parent.verticalCenter
+            text: change_preference.state? "Recurso de simplificação de conta desativado":
+                                           "Recurso de simplificação de conta ativado"
+            font.bold: true
+            color: "white"
         }
+        PropertyAnimation {
+            id: animation_alert
+            running: true
+            target: alert_message
+            property: 'visible'
+            to: false
+            duration: 2000 //Duração de 2 segundos
+        }
+    }
+
+    Row{
+        anchors.bottom: parent.bottom
+        anchors.horizontalCenter: parent.horizontalCenter
+        spacing: 10
+
+        Botao{
+            id: change_preference
+            property int state: 1
+            anchors.bottomMargin: 5
+            textoBotao:"<b> Simplificar </b>"
+            corBotao: change_preference.state? "#AA0000":"#00AA00"
+            width: 120
+            onClicouBotao: {
+                alert_message.visible = true
+                animation_alert.running = true
+                change_preference.state = change_preference.state? 0:1
+            }
+
+        }
+
+        Botao{
+            id: logout_button
+            anchors.bottomMargin: 5
+            textoBotao: "Logout"
+            onClicouBotao: {
+                salvar_usuario.deleteSettings()
+                stack.pop()
+            }
+        }
+
     }
 
     Connections{

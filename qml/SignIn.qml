@@ -117,6 +117,25 @@ Rectangle{
                          registrar()
                 }
             }
+            Rectangle {
+                id: divisor
+                width: 300
+                height: 2
+                anchors.horizontalCenter: parent.horizontalCenter
+                color: "#cccccc"
+            }
+            Row{
+                id: check_row
+                CheckBox {
+                    height: 70
+                    width: 300
+                    id: check_box
+                    anchors.horizontalCenter: scroll_bar.horizontalCenter
+                    spacing: 20
+                    text: qsTr("Simplificar minhas contas!")
+                    font.bold: true
+                }
+            }
         }
     }
 
