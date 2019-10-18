@@ -11,9 +11,6 @@ void Despesa::setDescricao(const QString &value) { descricao = value; }
 QString Despesa::getData() const { return data; }
 void Despesa::setData(const QString &value) { data = value; }
 
-QString Despesa::getMoeda() const { return moeda; }
-void Despesa::setMoeda(const QString &value) { moeda = value; }
-
 QString Despesa::getCategoria() const { return categoria; }
 void Despesa::setCategoria(const QString &value) { categoria = value; }
 

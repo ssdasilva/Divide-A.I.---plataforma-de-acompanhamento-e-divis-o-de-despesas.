@@ -9,7 +9,7 @@ public:
     Manejar_despesa(QObject *parent = nullptr);
 
     Q_INVOKABLE bool inserirDespesa(QString email, QString descricao,
-                                   QString data, QString moeda, QString categoria,
+                                   QString data, QString categoria,
                                    QString frequencia, QString quantia);
     //Permite a inserção de uma nova dívida para o usuário do usuário email.
     //Retorna true se a inserção foi bem sucedida e false caso contrário
@@ -25,8 +25,6 @@ public:
     Q_INVOKABLE QString getDescricaoDespesaUsuario(QString email, unsigned long order);
 
     Q_INVOKABLE QString getCategoriaDespesaUsuario(QString email, unsigned long order);
-
-    Q_INVOKABLE QString getMoedaDespesaUsuario(QString email, unsigned long order);
 
     Q_INVOKABLE int getQuantiaDespesaUsuario(QString email, unsigned long order);
 

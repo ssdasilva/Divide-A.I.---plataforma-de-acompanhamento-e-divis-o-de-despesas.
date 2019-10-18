@@ -24,11 +24,12 @@ Item {
             }
         }
         Row{
-            spacing: 10
+            spacing: 5
             anchors.horizontalCenter: parent.horizontalCenter
             Text {
                 id: currency
                 font.pixelSize: 12
+                text: qsTr("R$")
             }
             Text {
                 id: amount
@@ -40,7 +41,6 @@ Item {
     function setHeight(value) {expense.height = value}
     function setY(value) {expense.y = value}
     function setDescription(text) {description.text = text}
-    function setCurrency(text) {currency.text = text}
     function setCategory(text) {category.text = text}
     function setAmount(text) {amount.text = text}
     function destroy() {expense.destroy()}

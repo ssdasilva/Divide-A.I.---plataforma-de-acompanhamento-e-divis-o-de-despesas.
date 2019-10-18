@@ -17,9 +17,6 @@ public:
     QString getData() const;
     void setData(const QString &value);
 
-    QString getMoeda() const;
-    void setMoeda(const QString &value);
-
     QString getCategoria() const;
     void setCategoria(const QString &value);
 
@@ -33,7 +30,6 @@ private:
     QString email;
     QString descricao;
     QString data;
-    QString moeda;
     QString categoria;
     QString frequencia;
     qint8 quantia;

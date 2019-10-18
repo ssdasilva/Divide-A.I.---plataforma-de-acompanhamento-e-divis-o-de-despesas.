@@ -14,39 +14,36 @@ Item {
         if (!hasLoadedObjects){
             var emailLogado = secaoUsuario.getEmailLogado()
             var quantidade = manejarDespesa.quantidadeDespesasUsuario(emailLogado)
-            expenseDisplay.height = expenseHeight*quantidade
-            console.log(quantidade)
+            height = expenseHeight*quantidade
 
             var i;
             for (i=0; i<quantidade; i++){
                 var component
                 component = Qt.createComponent("Expense.qml")
-                expenseDisplay.expenses[i] = component.createObject(expenseDisplay)
-                if (expenseDisplay.expenses[i] !== null){
-                    expenseDisplay.expenses[i].setHeight(expenseDisplay.height)
-                    expenseDisplay.expenses[i].setY(expenseDisplay.expenseHeight*i)
+                expenses[i] = component.createObject(expenseDisplay)
+                if (expenses[i] !== null){
+                    expenses[i].setHeight(expenseDisplay.height)
+                    expenses[i].setY(expenseDisplay.expenseHeight*i)
 
                     var description = manejarDespesa.getDescricaoDespesaUsuario(emailLogado, i)
-                    expenseDisplay.expenses[i].setDescription(description)
+                    expenses[i].setDescription(description)
                     var category = manejarDespesa.getCategoriaDespesaUsuario(emailLogado, i)
-                    expenseDisplay.expenses[i].setCategory(category)
-                    var currency = manejarDespesa.getMoedaDespesaUsuario(emailLogado, i)
-                    expenseDisplay.expenses[i].setCurrency(currency)
+                    expenses[i].setCategory(category)
                     var amount = manejarDespesa.getQuantiaDespesaUsuario(emailLogado, i)
-                    expenseDisplay.expenses[i].setAmount(amount)
+                    expenses[i].setAmount(amount)
                 }
             }
-            expenseDisplay.numberOfExpenses = quantidade
+            numberOfExpenses = quantidade
             hasLoadedObjects = true
         }
     }
 
     function deleteObjects(){
         var i
-        for (i=0; i<expenseDisplay.numberOfExpenses; i++){
-            expenseDisplay.expenses[i].destroy()
+        for (i=0; i<numberOfExpenses; i++){
+            expenses[i].destroy()
         }
-        expenseDisplay.numberOfExpenses = 0
+        numberOfExpenses = 0
         hasLoadedObjects = false
     }
 }

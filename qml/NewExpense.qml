@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import QtQuick.Controls 1.4
+import QtQuick.Controls.Styles 1.4
 import QtQuick.Controls 2.12
 
 Rectangle {
@@ -29,14 +30,15 @@ Rectangle {
             clip: true
             anchors.top: title.bottom
 
-            property int y_mainColumn: 20
+            property int scrollColumn_y: 20
             property int textMessages_width: 100
             property int input_width: 200
             property int input_height: 40
+
             Column {
                 id: scrollColumn
                 spacing: 10
-                y: scroll_bar.y_mainColumn
+                y: scroll_bar.scrollColumn_y
                 Row {
                     id: rowName
                     height: 50
@@ -51,6 +53,25 @@ Rectangle {
                         id: name_typed
                         placeholderText: qsTr("Digite o nome da despesa")
                         anchors.verticalCenter: name.verticalCenter
+                    }
+                }
+                Row {
+                    id: rowAmount
+                    height: 30
+                    spacing: 10
+                    Text {
+                        id: amount
+                        text: qsTr("Quantia")
+                        width: scroll_bar.textMessages_width
+                    }
+                    TextField {
+                        id: amount_typed
+                        placeholderText: qsTr("Insira um valor")
+                        anchors.verticalCenter: amount.verticalCenter
+                        onEditingFinished: {
+                            if (isNaN(parseInt(amount_typed.text)))
+                                amount_typed.text = ""
+                        }
                     }
                 }
                 Row {
@@ -76,6 +97,13 @@ Rectangle {
                                 transformOrigin: Item.Left
                                 scale: 0.6
                                 font.pointSize: 16
+                                Keys.onPressed: {
+                                    if (event.key === Qt.Key_Enter ||
+                                        event.key === Qt.Key_Return) {
+                                        expenseType_expense_radio_button.checked = true
+                                        date_selected.focus = true
+                                    }
+                                }
                             }
                             RadioButton {
                                 id: expenseType_gain_radio_button
@@ -83,6 +111,13 @@ Rectangle {
                                 transformOrigin: Item.Left
                                 scale: 0.6
                                 font.pointSize: 16
+                                Keys.onPressed: {
+                                    if (event.key === Qt.Key_Enter ||
+                                        event.key === Qt.Key_Return) {
+                                        expenseType_gain_radio_button.checked = true
+                                        date_selected.focus = true
+                                    }
+                                }
                             }
                         }
                     }
@@ -95,36 +130,34 @@ Rectangle {
                         text: qsTr("Data da despesa")
                         width: scroll_bar.textMessages_width
                     }
-                    TextField {
-                        id: date_selected
-                        placeholderText: qsTr("Selecione uma data")
+                    Rectangle {
+                        id: date_selected_rectangle
+                        width: scroll_bar.input_width
+                        height: scroll_bar.input_height
                         anchors.verticalCenter: date.verticalCenter
+                        border.color: "#bdbdbd"
+                        border.width: 1
+
+                        Text {
+                            id: date_selected
+                            anchors.verticalCenter: parent.verticalCenter
+                            anchors.left: parent.left
+                            anchors.leftMargin: 10
+                            color: "#bdbdbd"
+                            text: qsTr("Selecione uma data")
+                        }
 
                         MouseArea {
                             anchors.fill: parent
                             onClicked: {
-                                calendar_rectangle.visible = true
-                                disableAllInputs()
+                                showCalendar()
                             }
                         }
-                    }
-                }
-                Row {
-                    id: rowCurrency
-                    spacing: 10
-                    Text {
-                        id: currency
-                        text: qsTr("Moeda")
-                        width: scroll_bar.textMessages_width
-                    }
-                    Rectangle {
-                        anchors.verticalCenter: currency.verticalCenter
-                        width: scroll_bar.input_width
-                        height: scroll_bar.input_height
-                        ComboBox {
-                            id: currency_combo_box
-                            anchors.fill: parent
-                            model: ["R$", "US$"]
+                        Keys.onPressed: {
+                            if (event.key === Qt.Key_Enter ||
+                                event.key === Qt.Key_Return) {
+                                showCalendar()
+                            }
                         }
                     }
                 }
@@ -209,25 +242,6 @@ Rectangle {
                         }
                     }
                 }
-                Row {
-                    id: rowAmount
-                    spacing: 10
-                    height: 75
-                    Text {
-                        id: amount
-                        text: qsTr("Quantia")
-                        width: scroll_bar.textMessages_width
-                    }
-                    TextField {
-                        id: amount_typed
-                        placeholderText: qsTr("Insira um valor")
-                        anchors.verticalCenter: amount.verticalCenter
-                        onEditingFinished: {
-                            if (isNaN(parseInt(amount_typed.text)))
-                                amount_typed.text = ""
-                        }
-                    }
-                }
             }
         }
         Column{
@@ -283,7 +297,6 @@ Rectangle {
     function disableAllInputs() {
         name_typed.enabled = false
         date_selected.enabled = false
-        currency_combo_box.enabled = false
         category_combo_box.enabled = false
         recurrentExpense_no_radio_button.enabled = false
         recurrentExpense_yes_radio_button.enabled = false
@@ -293,7 +306,6 @@ Rectangle {
     function enableAllInputs() {
         name_typed.enabled = true
         date_selected.enabled = true
-        currency_combo_box.enabled = true
         category_combo_box.enabled = true
         recurrentExpense_no_radio_button.enabled = true
         recurrentExpense_yes_radio_button.enabled = true
@@ -306,7 +318,6 @@ Rectangle {
         var email = secaoUsuario.getEmailLogado()
         var description = name_typed.text
         var date = date_selected.text
-        var currency = currency_combo_box.currentText
         var category = category_combo_box.currentText
         var frequency
         if (recurrentExpense_yes_radio_button.checked)
@@ -317,7 +328,7 @@ Rectangle {
         if (amount === "") amount = "0"
         if (expenseType_gain_radio_button.checked) amount *= -1
         if (description !== "") {
-            var x = manejarDespesa.inserirDespesa(email, description, date, currency,
+            var x = manejarDespesa.inserirDespesa(email, description, date,
                                           category, frequency, amount)
             clearInputs()
             returnToDashboard()
@@ -335,12 +346,17 @@ Rectangle {
         stack.pop()
     }
 
+    function showCalendar(){
+        date_selected.color = "#000000"
+        calendar_rectangle.visible = true
+        disableAllInputs()
+    }
+
     function clearInputs() {
         name_typed.text = ""
         expenseType_expense_radio_button.checked = true
         expenseType_gain_radio_button.checked = false
         date_selected.text = ""
-        currency_combo_box.currentIndex = 0
         category_combo_box.currentIndex = 0
         recurrentExpense_no_radio_button.checked = true
         recurrentExpense_yes_radio_button.checked = false

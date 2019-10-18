@@ -13,13 +13,12 @@ bool DespesaDAO::insertDespesa(const Despesa &despesa) const {
     // inserida se não existir, caso contrário, será atualizada
     query.prepare( QStringLiteral(
         "INSERT INTO despesa (email, descricao, data, "
-        "moeda, categoria, frequencia, quantia) "
-        "VALUES (?, ?, ?, ?, ?, ?, ?)"));
+        "categoria, frequencia, quantia) "
+        "VALUES (?, ?, ?, ?, ?, ?)"));
 
     query.addBindValue(despesa.getEmail());
     query.addBindValue(despesa.getDescricao());
     query.addBindValue(despesa.getData());
-    query.addBindValue(despesa.getMoeda());
     query.addBindValue(despesa.getCategoria());
     query.addBindValue(despesa.getFrequencia());
     query.addBindValue(despesa.getQuantia());
@@ -107,7 +106,6 @@ DespesaDAO::usuarios(const QString &email) const{
       despesa->setEmail(query.value(0).toString());
       despesa->setDescricao(query.value(1).toString());
       despesa->setData(query.value(2).toString());
-      despesa->setMoeda(query.value(3).toString());
       despesa->setCategoria(query.value(4).toString());
       despesa->setFrequencia(query.value(5).toString());
       despesa->setQuantia(query.value(6).toInt());
