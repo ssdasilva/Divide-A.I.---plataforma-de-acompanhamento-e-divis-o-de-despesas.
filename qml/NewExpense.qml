@@ -176,7 +176,12 @@ Rectangle {
                         ComboBox {
                             id: category_combo_box
                             anchors.fill: parent
-                            model: ["Alimentação","Transporte","Lazer"]
+                            model: ["Alimentação","Transporte",
+                                "Lazer","Supermercado","Compras",
+                                "Viagem","Saúde","Educação",
+                                "Trabalho","Família", "Hobbies",
+                                "Esporte","Presentes","Doações",
+                                "Casa","Contas"]
                         }
                     }
                 }
