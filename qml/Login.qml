@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.12
 import QtQuick.Controls 2.12
 import QtQuick.Window 2.12
 
@@ -6,6 +6,8 @@ Rectangle {
     id: loginWindow
     width: parent.width
     height: parent.height
+
+    signal notify(string a)
 
     //Verifica se tem um e-mail válido no arquivo de configuração
     Component.onCompleted: checkSettings()
@@ -185,6 +187,7 @@ Rectangle {
     }
 
     function showDashboardView(){
+        notify("Hello World")
         stack.push(mainDashboard_View)
     }
 
