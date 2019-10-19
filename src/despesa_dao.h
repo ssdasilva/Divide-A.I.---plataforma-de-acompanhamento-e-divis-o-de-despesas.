@@ -5,29 +5,30 @@
 #include <vector>
 
 #include <QString>
+#include <QMap>
 
 class Despesa;
 
 class DespesaDAO {
 public:
-    DespesaDAO() = default;
+  DespesaDAO() = default;
 
-    bool insertDespesa(const Despesa &despesa) const;
+  bool insertDespesa(const Despesa &despesa) const;
 
-    bool removeDespesa(const QString &email,
-                       const QString &descricao) const;
+  bool removeDespesa(const QString &email, const QString &descricao) const;
 
-    bool removeAll() const;
+  bool removeAll() const;
 
-    int despesaCount() const;
+  int despesaCount() const;
 
-    int despesaCountUsuario(const QString &email) const;
+  int despesaCountUsuario(const QString &email) const;
 
-    std::unique_ptr<std::vector<std::unique_ptr<Despesa>>>
-    usuarios(const QString &email = QString()) const;
+  std::unique_ptr<std::vector<std::unique_ptr<Despesa>>>
+  usuarios(const QString &email = QString()) const;
 
-    bool atualizarQuantia(QString email, QString descricao,
-                          int quantia) const;
+  bool atualizarQuantia(QString email, QString descricao, int quantia) const;
+
+  QMap<QString, int> gastoPorCategoria(QString email);
 };
 
 #endif // DESPESA_DAO_H
