@@ -26,13 +26,13 @@ void PerfilUsuario::init() {
     m_nome = list->at(0)->nome();
     m_sobrenome = list->at(0)->sobrenome();
     m_saldo = list->at(0)->saldo();
-    m_simplificar =  list->at(0)->simplificar();
+    m_simplificar = list->at(0)->simplificar();
 
   } else
     qDebug() << "Erro no perfil usuário --> não achou usuário";
 
   // Utilizado par atualizar o saldo a cada 10 minutos
-  connect(&m_timer, SIGNAL(timeout), this, SLOT(setSaldo()));
+  connect(&m_timer, SIGNAL(timeout()), this, SLOT(setSaldo()));
   m_timer.start(600000);
 
   emit mudouPerfil();
@@ -82,8 +82,8 @@ void PerfilUsuario::setSaldo() {
 bool PerfilUsuario::simplificar() const { return m_simplificar; }
 
 void PerfilUsuario::setSimplificar(bool simplificar) {
-    m_simplificar = simplificar;
-    UsuarioDAO *usuarioDAO = DatabaseManager::instance().usuarioDAO();
+  m_simplificar = simplificar;
+  UsuarioDAO *usuarioDAO = DatabaseManager::instance().usuarioDAO();
 
-    usuarioDAO->atualizarSimplificar(m_email,m_simplificar);
+  usuarioDAO->atualizarSimplificar(m_email, m_simplificar);
 }
