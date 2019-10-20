@@ -1,4 +1,4 @@
-#include <QGuiApplication>
+#include <QApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 
@@ -7,11 +7,12 @@
 #include "secao_usuario.h"
 #include "salvar_usuario.h"
 #include "perfil_usuario.h"
+#include "grafico_categoria.h"
 
 int main(int argc, char *argv[]) {
   QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
-  QGuiApplication app(argc, argv);
+  QApplication app(argc, argv);
 
   QQmlApplicationEngine engine;
   const QUrl url(QStringLiteral("qrc:/qml/main.qml"));
@@ -37,6 +38,10 @@ int main(int argc, char *argv[]) {
 
   PerfilUsuario *perfilUsuario = new PerfilUsuario();
   engine.rootContext()->setContextProperty("perfilUsuario", perfilUsuario);
+
+  GraficoCategoria *graficoCategoria = new GraficoCategoria();
+  engine.rootContext()->setContextProperty("graficoCategoria",
+                                           graficoCategoria);
 
   // salvar_usuario->deleteSettings();
 

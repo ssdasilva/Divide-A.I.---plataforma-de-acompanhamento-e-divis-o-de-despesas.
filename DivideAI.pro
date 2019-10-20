@@ -1,4 +1,5 @@
 QT += quick sql
+QT += charts
 
 CONFIG += c++11
 
@@ -20,6 +21,7 @@ HEADERS += \
     src/despesa_dao.h \
     src/divida.h \
     src/divida_dao.h \
+    src/grafico_categoria.h \
     src/grupo.h \
     src/grupo_dao.h \
     src/manejar_despesa.h \
@@ -37,6 +39,7 @@ SOURCES += \
         src/despesa_dao.cpp \
         src/divida.cpp \
         src/divida_dao.cpp \
+        src/grafico_categoria.cpp \
         src/grupo_dao.cpp \
         src/main.cpp \
         src/database_manager.cpp \

@@ -137,7 +137,7 @@ QMap<QString, int> DespesaDAO::gastoPorCategoria(QString email) {
       "GROUP BY categoria"));
   query.addBindValue(email);
 
-  qDebug() << query.exec();
+  query.exec();
 
   QMap<QString, int> categorias;
 

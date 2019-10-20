@@ -28,7 +28,7 @@ Rectangle {
             id: headerRow
             width: parent.width
             height: 50
-            property int numberOfButtons: 4
+            property int numberOfButtons: 5
 
             Button {
                 id: groupButton
@@ -74,6 +74,22 @@ Rectangle {
                     if (event.key === Qt.Key_Enter ||
                         event.key === Qt.Key_Return) {
                         setflag(3)
+                    }
+                }
+            }
+
+            Button {
+                id: graficoDespesasButton
+                width: parent.width/headerRow.numberOfButtons
+                height: parent.height
+                text: qsTr("Gráfico")
+                font.bold: true
+                font.pointSize: 15
+                onClicked: setflag(4)
+                Keys.onPressed: {
+                    if (event.key === Qt.Key_Enter ||
+                        event.key === Qt.Key_Return) {
+                        setflag(4)
                     }
                 }
             }
@@ -411,6 +427,19 @@ Rectangle {
         }
 
         Column{
+            id: graficoDespesasContent
+            y: 0
+            height: scroll_bar.height
+            width: scroll_bar.width
+            anchors.top: parent.top
+            visible: false
+
+            GraficoCategorias{
+
+            }
+        }
+
+        Column{
             id: despesasContent
             y: 0
             width: parent.width
@@ -526,6 +555,13 @@ Rectangle {
             showDespesasContent()
             break;
 
+        case 4:
+            graficoCategoria.criarGrafico()
+            hideAllContents()
+            graficoDespesasContent.visible = true;
+            scroll_bar.contentHeight = graficoDespesasContent.height
+            break;
+
         default:
             break;
         }
@@ -536,6 +572,7 @@ Rectangle {
         expensesContent.visible = false;
         perfilUsuarioContent.visible = false;
         despesasContent.visible = false;
+        graficoDespesasContent.visible = false;
     }
 
     function showDespesasContent(){

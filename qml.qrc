@@ -9,5 +9,6 @@
         <file>qml/Botao.qml</file>
         <file>qml/ExpenseDisplay.qml</file>
         <file>qml/Expense.qml</file>
+        <file>qml/GraficoCategorias.qml</file>
     </qresource>
 </RCC>

@@ -181,7 +181,7 @@ Rectangle {
                                 "Viagem","Saúde","Educação",
                                 "Trabalho","Família", "Hobbies",
                                 "Esporte","Presentes","Doações",
-                                "Casa","Contas"]
+                                "Casa","Contas", "Outros"]
                         }
                     }
                 }
@@ -335,6 +335,7 @@ Rectangle {
         if (description !== "") {
             var x = manejarDespesa.inserirDespesa(email, description, date,
                                           category, frequency, amount)
+            graficoCategoria.criarGrafico()
             clearInputs()
             returnToDashboard()
         }
