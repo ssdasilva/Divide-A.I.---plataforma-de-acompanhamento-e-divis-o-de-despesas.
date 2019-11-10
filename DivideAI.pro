@@ -2,6 +2,7 @@ QT += quick sql
 QT += charts
 
 CONFIG += c++11
+QT += testlib
 
 # The following define makes your compiler emit warnings if you use
 # any Qt feature that has been marked deprecated (the exact warnings
@@ -28,6 +29,7 @@ HEADERS += \
     src/salvar_usuario.h \
     src/secao_usuario.h \
     src/perfil_usuario.h \
+    src/tst_salvar_usuario.h \
     src/usuario.h \
     src/usuario_dao.h \
     src/usuario_grupo.h \
@@ -48,6 +50,7 @@ SOURCES += \
         src/salvar_usuario.cpp \
         src/secao_usuario.cpp \
         src/perfil_usuario.cpp \
+        src/tst_salvar_usuario.cpp \
         src/usuario.cpp \
         src/usuario_dao.cpp \
         src/usuario_grupo.cpp \

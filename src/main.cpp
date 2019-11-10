@@ -8,8 +8,12 @@
 #include "salvar_usuario.h"
 #include "perfil_usuario.h"
 #include "grafico_categoria.h"
+#include "tst_salvar_usuario.h"
 
 int main(int argc, char *argv[]) {
+  tst_salvar_usuario test1;
+  QTest::qExec(&test1);
+
   QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
   QApplication app(argc, argv);
