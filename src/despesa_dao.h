@@ -17,6 +17,8 @@ public:
 
   bool removeDespesa(const QString &email, const QString &descricao) const;
 
+  bool removeTodasDespesasUsuario(const QString &email) const;
+
   bool removeAll() const;
 
   int despesaCount() const;

@@ -28,10 +28,11 @@ DatabaseManager::DatabaseManager()
   m_database->setPassword("Veujw2R99MrbPUN8VX_A7bWtjzI52k-4");
   m_database->setPort(5432);
   m_database->setDatabaseName("lhdsevbs");
-  if (m_database->open()) {
-    qDebug() << "Abriu o banco";
-  } else
-    qDebug() << "Banco não foi aberto";
+  m_database->open();
+//  if (m_database->open()) {
+//    qDebug() << "Abriu o banco";
+//  } else
+//    qDebug() << "Banco não foi aberto";
 }
 
 UsuarioDAO *DatabaseManager::usuarioDAO() { return &m_usuarioDAO; }

@@ -39,6 +39,16 @@ bool DespesaDAO::removeDespesa(const QString &email,
   return query.exec();
 }
 
+bool DespesaDAO::removeTodasDespesasUsuario(const QString &email) const {
+  QSqlQuery query;
+
+  query.prepare(
+      QStringLiteral("DELETE FROM despesa WHERE email = ?"));
+  query.addBindValue(email);
+
+  return query.exec();
+}
+
 bool DespesaDAO::removeAll() const {
   QSqlQuery query;
 

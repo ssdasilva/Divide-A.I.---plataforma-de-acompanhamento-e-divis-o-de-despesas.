@@ -9,10 +9,18 @@
 #include "perfil_usuario.h"
 #include "grafico_categoria.h"
 #include "tst_salvar_usuario.h"
+#include "tst_manejar_despesa.h"
+#include "tst_despesa_dao.h"
 
 int main(int argc, char *argv[]) {
   tst_salvar_usuario test1;
   QTest::qExec(&test1);
+
+  tst_manejar_despesa test2;
+  QTest::qExec(&test2);
+
+  tst_despesa_dao test3;
+  QTest::qExec(&test3);
 
   QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 

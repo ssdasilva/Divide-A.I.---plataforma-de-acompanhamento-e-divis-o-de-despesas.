@@ -12,8 +12,6 @@ class tst_salvar_usuario: public QObject
     public:
         tst_salvar_usuario();
     private slots:
-        void testSave();
-        void testDeleteSettings();
 };
 
 #endif // TST_SALVAR_USUARIO_H
