@@ -16,8 +16,6 @@ public:
 
   bool removeGrupo(const QString &identificador) const;
 
-  bool removeAll() const;
-
   int grupoCount() const;
 
   std::unique_ptr<std::vector<std::unique_ptr<Grupo>>>

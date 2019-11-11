@@ -11,8 +11,15 @@
 #include "tst_salvar_usuario.h"
 #include "tst_manejar_despesa.h"
 #include "tst_despesa_dao.h"
+#include "tst_grupo.h"
+#include "tst_grupo_dao.h"
+#include "tst_perfil_usuario.h"
 
 int main(int argc, char *argv[]) {
+  QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+
+  QApplication app(argc, argv);
+
   tst_salvar_usuario test1;
   QTest::qExec(&test1);
 
@@ -22,9 +29,14 @@ int main(int argc, char *argv[]) {
   tst_despesa_dao test3;
   QTest::qExec(&test3);
 
-  QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+  tst_grupo test4;
+  QTest::qExec(&test4);
 
-  QApplication app(argc, argv);
+  tst_grupo_dao test5;
+  QTest::qExec(&test5);
+
+  tst_perfil_usuario test6;
+  QTest::qExec(&test6);
 
   QQmlApplicationEngine engine;
   const QUrl url(QStringLiteral("qrc:/qml/main.qml"));
@@ -54,8 +66,6 @@ int main(int argc, char *argv[]) {
   GraficoCategoria *graficoCategoria = new GraficoCategoria();
   engine.rootContext()->setContextProperty("graficoCategoria",
                                            graficoCategoria);
-
-  // salvar_usuario->deleteSettings();
 
   engine.load(url);
 

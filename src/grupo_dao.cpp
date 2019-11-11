@@ -10,7 +10,7 @@ bool GrupoDAO::insertGrupo(const Grupo &grupo) const {
   // Monta a query com o uso de REPLACE de tal forma que o grupo será
   // inserido se não existir, caso contrário, será atualizado
   query.prepare(QStringLiteral(
-      "INSERT INTO grupo (identificador, nome, numPessoas) VALUES (?, ?, ?)"));
+      "INSERT INTO grupo (identificador, nome, quantidade_pessoas) VALUES (?, ?, ?)"));
 
   query.addBindValue(grupo.identificador());
   query.addBindValue(grupo.nome());
@@ -24,14 +24,6 @@ bool GrupoDAO::removeGrupo(const QString &identificador) const {
 
   query.prepare(QStringLiteral("DELETE FROM grupo WHERE identificador = ?"));
   query.addBindValue(identificador);
-
-  return query.exec();
-}
-
-bool GrupoDAO::removeAll() const {
-  QSqlQuery query;
-
-  query.prepare(QStringLiteral("DELETE FROM grupo"));
 
   return query.exec();
 }
@@ -92,7 +84,7 @@ bool GrupoDAO::adicionarUmaPessoaAoGrupo(const QString &identificador) const {
   QSqlQuery query;
 
   query.prepare(QStringLiteral(
-      "UPDATE grupo SET numPessoas = numPessoas + 1 WHERE identificador = ?"));
+      "UPDATE grupo SET quantidade_pessoas = quantidade_pessoas + 1 WHERE identificador = ?"));
   query.addBindValue(identificador);
 
   return query.exec();
