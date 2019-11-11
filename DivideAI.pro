@@ -29,6 +29,7 @@ HEADERS += \
     src/salvar_usuario.h \
     src/secao_usuario.h \
     src/perfil_usuario.h \
+    src/tst_despesa.h \
     src/tst_despesa_dao.h \
     src/tst_grupo.h \
     src/tst_grupo_dao.h \
@@ -55,6 +56,7 @@ SOURCES += \
         src/salvar_usuario.cpp \
         src/secao_usuario.cpp \
         src/perfil_usuario.cpp \
+        src/tst_despesa.cpp \
         src/tst_despesa_dao.cpp \
         src/tst_grupo.cpp \
         src/tst_grupo_dao.cpp \

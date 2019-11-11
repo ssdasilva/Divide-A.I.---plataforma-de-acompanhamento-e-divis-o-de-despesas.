@@ -14,29 +14,33 @@
 #include "tst_grupo.h"
 #include "tst_grupo_dao.h"
 #include "tst_perfil_usuario.h"
+#include "tst_despesa.h"
 
 int main(int argc, char *argv[]) {
   QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
   QApplication app(argc, argv);
 
-  tst_salvar_usuario test1;
-  QTest::qExec(&test1);
+  tst_despesa testDespesa;
+  QTest::qExec(&testDespesa);
 
-  tst_manejar_despesa test2;
-  QTest::qExec(&test2);
+  tst_manejar_despesa testManejarDespesa;
+  QTest::qExec(&testManejarDespesa);
 
-  tst_despesa_dao test3;
-  QTest::qExec(&test3);
+  tst_despesa_dao testDespesaDAO;
+  QTest::qExec(&testDespesaDAO);
 
-  tst_grupo test4;
-  QTest::qExec(&test4);
+  tst_salvar_usuario testSalvarUsuario;
+  QTest::qExec(&testSalvarUsuario);
 
-  tst_grupo_dao test5;
-  QTest::qExec(&test5);
+  tst_grupo testGrupo;
+  QTest::qExec(&testGrupo);
 
-  tst_perfil_usuario test6;
-  QTest::qExec(&test6);
+  tst_grupo_dao testGrupoDAO;
+  QTest::qExec(&testGrupoDAO);
+
+  tst_perfil_usuario testPerfilUsuario;
+  QTest::qExec(&testPerfilUsuario);
 
   QQmlApplicationEngine engine;
   const QUrl url(QStringLiteral("qrc:/qml/main.qml"));
