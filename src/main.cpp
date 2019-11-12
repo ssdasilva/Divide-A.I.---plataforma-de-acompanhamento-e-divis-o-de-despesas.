@@ -15,11 +15,19 @@
 #include "tst_grupo_dao.h"
 #include "tst_perfil_usuario.h"
 #include "tst_despesa.h"
+#include "tst_usuario.h"
+#include "tst_usuario_dao.h"
 
 int main(int argc, char *argv[]) {
   QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
   QApplication app(argc, argv);
+
+  tst_usuario_dao testUsuarioDAO;
+  QTest::qExec(&testUsuarioDAO);
+
+  tst_usuario testUsuario;
+  QTest::qExec(&testUsuario);
 
   tst_despesa testDespesa;
   QTest::qExec(&testDespesa);
