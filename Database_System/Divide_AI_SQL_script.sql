@@ -17,7 +17,7 @@ CREATE TABLE Grupo(
 );
 
 CREATE TABLE Divida(
-	Email_devedor VARCHAR(100) NOT NULL,
+        Email_devedor VARCHAR(100) NOT NULL,
     Email_credor VARCHAR(100) NOT NULL,
     Quantia INT NOT NULL,
     Tipo_moeda VARCHAR(30),

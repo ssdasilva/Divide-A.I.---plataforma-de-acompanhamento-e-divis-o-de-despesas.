@@ -29,7 +29,7 @@ DatabaseManager::DatabaseManager()
   m_database->setPort(5432);
   m_database->setDatabaseName("lhdsevbs");
   m_database->open();
-//  if (m_database->open()) {
+//  if (x) {
 //    qDebug() << "Abriu o banco";
 //  } else
 //    qDebug() << "Banco não foi aberto";

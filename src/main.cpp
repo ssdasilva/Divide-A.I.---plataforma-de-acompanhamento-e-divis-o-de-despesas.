@@ -17,6 +17,9 @@
 #include "tst_despesa.h"
 #include "tst_usuario.h"
 #include "tst_usuario_dao.h"
+#include "tst_divida.h"
+#include "tst_divida_dao.h"
+#include "tst_usuario_grupo.h"
 
 int main(int argc, char *argv[]) {
   QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
@@ -37,6 +40,15 @@ int main(int argc, char *argv[]) {
 
   tst_despesa_dao testDespesaDAO;
   QTest::qExec(&testDespesaDAO);
+
+  tst_divida testDivida;
+  QTest::qExec(&testDivida);
+
+  tst_divida_dao testDividaDAO;
+  QTest::qExec(&testDividaDAO);
+
+  tst_usuario_grupo testUsuarioGrupo;
+  QTest::qExec(&testUsuarioGrupo);
 
   tst_salvar_usuario testSalvarUsuario;
   QTest::qExec(&testSalvarUsuario);

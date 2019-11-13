@@ -13,7 +13,7 @@ void tst_usuario_dao::initTestCase() {
   m_idade = 21;
   m_nome = "Fulano";
   m_sobrenome = "de Tal";
-  m_saldo = 11;
+  m_saldo = 1;
   m_simplificar = true;
 
   m_usuario.setEmail(m_email);
@@ -27,6 +27,7 @@ void tst_usuario_dao::initTestCase() {
 
 void tst_usuario_dao::testInsertUsuario() {
   UsuarioDAO *usuarioDAO = DatabaseManager::instance().usuarioDAO();
+  usuarioDAO->removeUsuario(m_usuario.email());
   QCOMPARE(usuarioDAO->insertUsuario(m_usuario), true);
   usuarioDAO->removeUsuario(m_usuario.email());
 }

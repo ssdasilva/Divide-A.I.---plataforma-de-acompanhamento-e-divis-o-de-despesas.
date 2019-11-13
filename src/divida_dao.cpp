@@ -10,8 +10,8 @@ bool DividaDAO::insertDivida(const Divida &divida) const {
   // Monta a query com o uso de REPLACE de tal forma que a divida será
   // inserida se não existir, caso contrário, será atualizada
   query.prepare(
-      QStringLiteral("INSERT INTO divida (emailDevedor, emailCredor, quantia, "
-                     "tipoMoeda, categoria) VALUES (?, ?, ?, ?, ?)"));
+      QStringLiteral("INSERT INTO divida (email_devedor, email_credor, quantia, "
+                     "tipo_moeda, categoria) VALUES (?, ?, ?, ?, ?)"));
 
   query.addBindValue(divida.emailDevedor());
   query.addBindValue(divida.emailCredor());
@@ -27,7 +27,7 @@ bool DividaDAO::removeDivida(const QString &emailDevedor,
   QSqlQuery query;
 
   query.prepare(QStringLiteral(
-      "DELETE FROM divida WHERE emailDevedor = ? AND emailCredor = ?"));
+      "DELETE FROM divida WHERE email_devedor = ? AND email_credor = ?"));
   query.addBindValue(emailDevedor);
   query.addBindValue(emailCredor);
 
@@ -68,14 +68,14 @@ DividaDAO::usuarios(const QString &emailDevedor,
     query.prepare(QStringLiteral("SELECT * FROM divida"));
   } else if (emailCredor.isEmpty()) {
     query.prepare(
-        QStringLiteral("SELECT * FROM divida WHERE emailDevedor = ?"));
+        QStringLiteral("SELECT * FROM divida WHERE email_devedor = ?"));
     query.addBindValue(emailDevedor);
   } else if (emailDevedor.isEmpty()) {
-    query.prepare(QStringLiteral("SELECT * FROM divida WHERE emailCredor = ?"));
+    query.prepare(QStringLiteral("SELECT * FROM divida WHERE email_credor = ?"));
     query.addBindValue(emailCredor);
   } else {
     query.prepare(QStringLiteral(
-        "SELECT * FROM divida WHERE emailDevedor = ? AND emailCredor = ?"));
+        "SELECT * FROM divida WHERE email_devedor = ? AND email_credor = ?"));
     query.addBindValue(emailDevedor);
     query.addBindValue(emailCredor);
   }
@@ -110,7 +110,7 @@ bool DividaDAO::atualizarQuantia(QString emailDevedor, QString emailCredor,
   QSqlQuery query;
 
   query.prepare(QStringLiteral("UPDATE divida SET quantia = ? WHERE "
-                               "emailDevedor = ? AND emailCredor = ?"));
+                               "email_devedor = ? AND email_credor = ?"));
   query.addBindValue(quantia);
   query.addBindValue(emailDevedor);
   query.addBindValue(emailCredor);
